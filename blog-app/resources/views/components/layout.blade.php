@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muzealne Spojrzenie</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script>
         tailwind.config = {
       theme: {
@@ -41,6 +42,8 @@
         class="w-full flex items-center justify-start font-bold bg-purple text-white h-24 mt-24 opacity-90 md:justify-center">
         <p class="ml-2">Copyright © 2023, Wszelkie prawa zastrzeżone</p>
     </footer>
+
+    <x-toast-message />
 
 </body>
 
