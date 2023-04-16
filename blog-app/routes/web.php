@@ -19,8 +19,11 @@ Route::get('/', function () {
 });
 
 
-// Show Register/Create Form
+// Show Register/Create Form for not auth user
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 // Create New User
 Route::post('/users', [UserController::class, 'store']);
+
+// Log User Out
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');

@@ -25,13 +25,29 @@
     <nav class="sticky top-0 w-full z-20 bg-gray-50 h-14 flex justify-between items-center items-center">
         <a href="/layouts/index.html" class="ml-4 font-bold hover:text-purple">Strona główna</a>
         <ul class="flex space-x-6 mr-6 text-lg">
+            @auth
             <li>
-                <a href="/layouts/register.html" class="hover:text-purple">Rejestracja</a>
+                <span class="font-bold uppercase">
+                    Welcome {{auth()->user()->name}}
+                </span>
+            </li>
+            <li>
+                <form class="inline" method="POST" action="/logout">
+                    @csrf
+                    <button type="submit">
+                        Logout
+                    </button>
+                </form>
+            </li>
+            @else
+            <li>
+                <a href="register" class="hover:text-purple">Rejestracja</a>
             </li>
             <li>
                 <a href="/layouts/login.html" class="hover:text-purple">
                     Logowanie</a>
             </li>
+            @endauth
         </ul>
     </nav>
 
