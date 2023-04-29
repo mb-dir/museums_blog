@@ -5,7 +5,7 @@
         <img class="hidden w-48 mr-6 md:block" src="http://wlaczpolske.pl/pliczki/252" alt="">
         <div>
             <h3 class="text-2xl">
-                <a href="/layouts/post.html">{{$post->title}}</a>
+                <a href={{"/posts/".$post->id}}>{{$post->title}}</a>
             </h3>
             <div class="text-xl font-bold mb-4">{{$post->user->name}}</div>
             <ul class="flex">
