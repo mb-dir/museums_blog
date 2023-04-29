@@ -18,8 +18,11 @@ use App\Http\Controllers\PostController;
 // Show all posts
 Route::get('/', [PostController::class, 'index']);
 
-// Create post
+// Create post view
 Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
+
+// Create post logic
+Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 
 // Show single post
 Route::get('/posts/{post}', [PostController::class, 'show']);
