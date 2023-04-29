@@ -51,7 +51,7 @@
         </ul>
     </nav>
 
-    <main class="h-screen">
+    <main>
         {{$slot}}
     </main>
     <footer
