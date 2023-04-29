@@ -17,7 +17,7 @@
             pozwól nam zainspirować Twoją pasję!
         </p>
         <p class="text-2xl text-gray-100">
-            Nie czekaj, <a class="text-black font-bold" href="/layouts/create.html">podziel się</a> swoimi
+            Nie czekaj, <a class="text-black font-bold" href="/posts/create">podziel się</a> swoimi
             przemyśleniami!
         </p>
     </div>

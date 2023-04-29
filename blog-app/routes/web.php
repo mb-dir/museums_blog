@@ -18,8 +18,10 @@ use App\Http\Controllers\PostController;
 // Show all posts
 Route::get('/', [PostController::class, 'index']);
 
-// Show single post
+// Create post
+Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth');
 
+// Show single post
 Route::get('/posts/{post}', [PostController::class, 'show']);
 
 // Show Register/Create Form for not auth user

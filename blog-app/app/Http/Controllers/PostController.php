@@ -15,8 +15,13 @@ class PostController extends Controller
     }
 
     //show single
-  public function show(Post $post)
-  {
-    return view('posts.show', ['post'=>$post]);
-  }
+    public function show(Post $post)
+    {
+        return view('posts.show', ['post'=>$post]);
+    }
+
+    public function create()
+    {
+        return view('posts.create');
+    }
 }
