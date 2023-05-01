@@ -16,7 +16,7 @@
                 </ul>
 
                 @if (Auth::check() && $post->user_id == Auth::user()->id)
-                <p>Możesz <a href="/posts/{{$post->id}}/edit">edytować</a> swój post</p>
+                <p>Możesz edytować swój post</p>
                 <a href="/posts/{{$post->id}}/edit">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
                         version="1.1" id="Capa_1" width="20px" height="20px" viewBox="0 0 494.936 494.936"

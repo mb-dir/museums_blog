@@ -7,8 +7,9 @@
                 </h2>
             </header>
 
-            <form method="PUT" action="/posts">
+            <form method="POST" action="/posts/{{$post->id}}">
                 @csrf
+                @method("PUT")
                 <div class="mb-6">
                     <label for="title" class="inline-block text-lg mb-2">Tytuł</label>
                     <input type="text" id="title" class="border border-gray-200 rounded p-2 w-full" name="title"

@@ -24,8 +24,11 @@ Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth
 // Create post logic
 Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 
-// Edit post
+// Edit post view
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->middleware('auth');
+
+// Update post
+Route::put('/posts/{post}', [PostController::class, 'update'])->middleware('auth');
 
 // Show single post
 Route::get('/posts/{post}', [PostController::class, 'show']);

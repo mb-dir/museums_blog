@@ -60,16 +60,15 @@ class PostController extends Controller
     ]);
   }
 
-    // public function edit(Request $request, Post $post)
-    // {
-    //     $formFields = $request->validate([
-    //         'title'=>'required',
-    //         'tags'=>'required',
-    //         'content'=>'required',
-    //     ]);
+    public function update(Request $request, Post $post)
+    {
+        $formFields = $request->validate([
+            'title'=>'required',
+            'tags'=>'required',
+            'content'=>'required',
+        ]);
+        $post->update($formFields);
 
-    //     $post->update($formFields);
-
-    //     return back()->with('message', "Post został zaaktualizowany");
-    // }
+        return redirect('/')->with('message', "Post został zaaktualizowany");
+    }
 }
