@@ -9,9 +9,15 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
-
-       return view('posts.index', ['posts'=>$posts]);
+        $posts = Post::where(function ($query) {
+            $search = request('search');
+            if ($search) {
+                $query->where('tags', 'like', '%' . $search . '%')->orWhere('content', 'like', '%' . $search . '%');
+            }
+        })
+        ->orderByDesc('created_at')
+        ->paginate(4);
+        return view('posts.index', ['posts'=>$posts]);
     }
 
     //show single
