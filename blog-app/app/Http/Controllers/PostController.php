@@ -47,4 +47,10 @@ class PostController extends Controller
 
         return Redirect('/')->with('message', "Post został utworzony");
     }
+
+    public function delete(Post $post)
+    {
+        $post->delete();
+        return redirect('/')->with('message', "Post zosatł usunięty");
+    }
 }

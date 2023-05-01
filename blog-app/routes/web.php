@@ -27,6 +27,9 @@ Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 // Show single post
 Route::get('/posts/{post}', [PostController::class, 'show']);
 
+// Delete post
+Route::delete('/posts/{post}', [PostController::class, 'delete'])->middleware('auth');
+
 // Show Register/Create Form for not auth user
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
