@@ -53,4 +53,23 @@ class PostController extends Controller
         $post->delete();
         return redirect('/')->with('message', "Post zosatł usunięty");
     }
+
+    public function edit(Post $post){
+    return view('posts.edit', [
+      "post"=> $post
+    ]);
+  }
+
+    // public function edit(Request $request, Post $post)
+    // {
+    //     $formFields = $request->validate([
+    //         'title'=>'required',
+    //         'tags'=>'required',
+    //         'content'=>'required',
+    //     ]);
+
+    //     $post->update($formFields);
+
+    //     return back()->with('message', "Post został zaaktualizowany");
+    // }
 }

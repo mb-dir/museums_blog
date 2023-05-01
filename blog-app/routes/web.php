@@ -24,6 +24,9 @@ Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth
 // Create post logic
 Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 
+// Edit post
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->middleware('auth');
+
 // Show single post
 Route::get('/posts/{post}', [PostController::class, 'show']);
 
