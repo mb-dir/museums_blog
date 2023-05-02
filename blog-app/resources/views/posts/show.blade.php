@@ -58,4 +58,35 @@
             </div>
         </div>
     </div>
+    <div class="bg-gray-50 border border-gray-200 p-10 mt-10 rounded">
+        <div class="flex flex-col items-center justify-center text-center">
+            <h3 class="text-3xl font-bold mb-4">Komentarze</h3>
+            <div class="space-y-4">
+                @foreach ($comments as $comment)
+                <div class="flex-1 border rounded-lg px-4 py-2 sm:px-6 sm:py-4 leading-relaxed">
+                    <strong>{{$comment->user->name}}</strong> <span
+                        class="text-xs text-gray-400">{{$comment->date}}</span>
+                    <p class="text-sm">
+                        {{$comment->content}}
+                    </p>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </div>
+    <div class="flex mx-auto items-center justify-center mt-10 mx-8 mb-4 max-w-lg">
+        <form action="" class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Dodaj nowy komentarz</h2>
+                <div class="w-full md:w-full px-3 mb-2 mt-2">
+                    <textarea
+                        class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
+                        name="content" placeholder="Treść komentarza..." required=""></textarea>
+                </div>
+                <div class="w-full md:w-full flex items-start md:w-full px-3">
+                    <button class="bg-purple text-gray-100 p-2 rounded">Skomentuj</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </x-layout>
