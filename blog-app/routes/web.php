@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,9 @@ Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth
 
 // Create post logic
 Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
+
+// Create new comment
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->middleware('auth');
 
 // Edit post view
 Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->middleware('auth');
