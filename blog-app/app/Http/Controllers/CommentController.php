@@ -22,6 +22,12 @@ class CommentController extends Controller
     $comment->post_id = $post->id;
     $comment->save();
 
+    //Increase user score
+    $user = auth()->user();
+    $user->score += 1;
+    // it works
+    $user->update();
+
     return redirect()->back()->with('message', 'Komentarz został dodany');
 }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -46,6 +47,12 @@ class PostController extends Controller
         $formFields['user_id']=auth()->id();
 
         Post::create($formFields);
+
+        //Increase user score
+        $user = auth()->user();
+        $user->score += 2;
+        // it works
+        $user->update();
 
         return Redirect('/')->with('message', "Post został utworzony");
     }
