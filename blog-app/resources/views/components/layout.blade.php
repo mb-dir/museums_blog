@@ -39,6 +39,13 @@
                     </button>
                 </form>
             </li>
+            <li>
+                @foreach(auth()->user()->roles as $role)
+                @if (auth()->user()->score >= $role->min_score)
+                {{$role->name}}
+                @endif
+                @endforeach
+            </li>
             @else
             <li>
                 <a href="register" class="hover:text-purple">Rejestracja</a>
