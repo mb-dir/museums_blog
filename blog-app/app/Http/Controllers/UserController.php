@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Ranking;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -11,6 +12,11 @@ class UserController extends Controller
     // Show Register/Create Form
     public function create() {
         return view('users.register');
+    }
+
+    public function show(){
+         $rankings = Ranking::with('users')->get();
+        return view('users.show', ['rankings'=>$rankings]);
     }
 
     // Create New User

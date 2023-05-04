@@ -12,7 +12,6 @@ class PostController extends Controller
 {
     public function index()
     {
-        $rankings = Ranking::with('users')->get();
         $posts = Post::where(function ($query) {
             $search = request('search');
             if ($search) {
@@ -21,7 +20,7 @@ class PostController extends Controller
         })
         ->orderByDesc('created_at')
         ->paginate(4);
-        return view('posts.index', ['posts'=>$posts, 'rankings'=>$rankings]);
+        return view('posts.index', ['posts'=>$posts]);
     }
 
     //show single

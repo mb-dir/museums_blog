@@ -27,9 +27,9 @@
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
             <li>
-                <span class="font-bold uppercase">
+                <a href="/user-info" class="font-bold uppercase">
                     Welcome {{auth()->user()->name}}
-                </span>
+                </a>
             </li>
             <li>
                 <form class="inline" method="POST" action="/logout">
