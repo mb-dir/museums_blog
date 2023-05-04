@@ -40,11 +40,12 @@
                 </form>
             </li>
             <li>
-                @foreach(auth()->user()->roles as $role)
+                {{-- {{auth()->user()->rankings}}
+                @foreach(auth()->user()->rankings as $role)
                 @if (auth()->user()->score >= $role->min_score)
                 {{$role->name}}
                 @endif
-                @endforeach
+                @endforeach --}}
             </li>
             @else
             <li>

@@ -24,7 +24,7 @@ class UserController extends Controller
         // Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
         $formFields['register_date'] = now();
-        $formFields['score'] = 1;
+        $formFields['score'] = 61;
 
         // Create User
         $user = User::create($formFields);

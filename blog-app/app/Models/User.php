@@ -55,8 +55,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Ranking::class);
-    }
 }

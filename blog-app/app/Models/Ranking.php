@@ -11,6 +11,6 @@ class Ranking extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class)->withPivot('score');
+        return $this->belongsToMany(User::class);
     }
 }

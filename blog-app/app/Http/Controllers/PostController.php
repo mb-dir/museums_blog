@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use App\Models\Post;
+use App\Models\Ranking;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,7 @@ class PostController extends Controller
 {
     public function index()
     {
+        $rankings = Ranking::with('users')->get();
         $posts = Post::where(function ($query) {
             $search = request('search');
             if ($search) {
@@ -19,7 +21,7 @@ class PostController extends Controller
         })
         ->orderByDesc('created_at')
         ->paginate(4);
-        return view('posts.index', ['posts'=>$posts]);
+        return view('posts.index', ['posts'=>$posts, 'rankings'=>$rankings]);
     }
 
     //show single
