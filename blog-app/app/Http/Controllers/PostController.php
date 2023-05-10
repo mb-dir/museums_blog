@@ -46,8 +46,11 @@ class PostController extends Controller{
         $user->score += 8;
         $user->update();
 
-        if($user->score>=20){
-            $user->rankings()->syncWithoutDetaching([1]);
+        $rankings = [1, 2, 3, 4, 5];
+        foreach($rankings as $rank){
+            if($user->score >= $rank * 20){
+                $user->rankings()->syncWithoutDetaching([$rank]);
+            }
         }
 
         return Redirect('/')->with('message', "Post został utworzony");

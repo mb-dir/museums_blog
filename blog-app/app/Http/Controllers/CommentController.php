@@ -26,6 +26,13 @@ class CommentController extends Controller{
         $user->score += 2;
         $user->update();
 
+        $rankings = [1, 2, 3, 4, 5];
+        foreach($rankings as $rank){
+            if($user->score >= $rank * 20){
+                $user->rankings()->syncWithoutDetaching([$rank]);
+            }
+        }
+
         return redirect()->back()->with('message', 'Komentarz został dodany');
     }
 }
