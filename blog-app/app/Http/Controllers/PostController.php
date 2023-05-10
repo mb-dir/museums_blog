@@ -46,6 +46,10 @@ class PostController extends Controller{
         $user->score += 8;
         $user->update();
 
+        if($user->score>=20){
+            $user->rankings()->syncWithoutDetaching([1]);
+        }
+
         return Redirect('/')->with('message', "Post został utworzony");
     }
 

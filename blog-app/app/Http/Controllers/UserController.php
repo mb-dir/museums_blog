@@ -14,7 +14,9 @@ class UserController extends Controller{
     }
 
     public function show(){
-         $rankings = Ranking::with('users')->get();
+        $user_id = auth()->id();
+        $user = User::with('rankings')->find($user_id);
+        $rankings = $user->rankings;
         return view('users.show', ['rankings'=>$rankings]);
     }
 
@@ -33,6 +35,8 @@ class UserController extends Controller{
 
         // Create User
         $user = User::create($formFields);
+
+        // $user->rankings()->attach([1,2,3,4,5]);
 
         // Login
         auth()->login($user);

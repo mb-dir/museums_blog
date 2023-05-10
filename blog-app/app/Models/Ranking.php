@@ -11,6 +11,6 @@ class Ranking extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany('App\Models\Ranking', 'ranking_user', 'ranking_id', 'user_id');
     }
 }

@@ -55,4 +55,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function rankings(){
+        return $this->belongsToMany('App\Models\Ranking', 'ranking_user', 'user_id', 'ranking_id');
+    }
 }

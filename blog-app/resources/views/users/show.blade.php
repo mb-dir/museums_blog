@@ -13,9 +13,7 @@
             <h2 class="text-2xl font-bold uppercase my-3">Twoje rangi</h2>
             <ul>
                 @foreach($rankings as $rank)
-                @if (auth()->user()->score >= $rank->min_score)
                 <li>{{$rank->name}}</li>
-                @endif
                 @endforeach
             </ul>
         </div>
