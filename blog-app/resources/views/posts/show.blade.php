@@ -5,15 +5,7 @@
                 <h3 class="text-2xl mb-2">{{$post->title}}</h3>
                 <div class="text-xl font-bold mb-2">{{$post->user->name}}</div>
 
-                {{-- TODO create component for tags --}}
-                <ul class="flex mb-2">
-                    @foreach(explode(',', $post->tags) as $tag)
-                    <li
-                        class="flex itssems-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs">
-                        {{$tag}}
-                    </li>
-                    @endforeach
-                </ul>
+                <x-tags :tags="$post->tags" />
 
                 @if (Auth::check() && $post->user_id == Auth::user()->id)
                 <p>Możesz edytować swój post</p>
