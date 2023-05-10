@@ -1,17 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\Models\Comment;
 use App\Models\Post;
-use App\Models\Ranking;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
-{
-    public function index()
-    {
+class PostController extends Controller{
+    public function index(){
         $posts = Post::where(function ($query) {
             $search = request('search');
             if ($search) {
@@ -24,21 +19,18 @@ class PostController extends Controller
     }
 
     //show single
-    public function show(Post $post)
-    {
+    public function show(Post $post){
         $comments = $post->comments;
         return view('posts.show', ['post'=>$post, 'comments'=>$comments]);
     }
 
     // craete view
-    public function create()
-    {
+    public function create(){
         return view('posts.create');
     }
 
     // create logic
-    public function store(Request $request)
-    {
+    public function store(Request $request){
         $formFields = $request->validate([
         'title'=>'required',
         'tags'=>'required',
@@ -49,29 +41,26 @@ class PostController extends Controller
 
         Post::create($formFields);
 
-        //Increase user score
-        $user = auth()->user();
-        $user->score += 2;
-        // it works
+        // Increase user score
+        $user = User::find(auth()->id());
+        $user->score += 8;
         $user->update();
 
         return Redirect('/')->with('message', "Post został utworzony");
     }
 
-    public function delete(Post $post)
-    {
+    public function delete(Post $post){
         $post->delete();
         return redirect('/')->with('message', "Post zosatł usunięty");
     }
 
     public function edit(Post $post){
-    return view('posts.edit', [
-      "post"=> $post
-    ]);
-  }
+        return view('posts.edit', [
+        "post"=> $post
+        ]);
+    }
 
-    public function update(Request $request, Post $post)
-    {
+    public function update(Request $request, Post $post){
         $formFields = $request->validate([
             'title'=>'required',
             'tags'=>'required',
