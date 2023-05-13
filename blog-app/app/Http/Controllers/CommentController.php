@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 
-class CommentController extends Controller{
-    public function store(Request $request, Post $post){
+class CommentController extends Controller {
+    public function store(Request $request, Post $post) {
         $validatedData = $request->validate([
             'content' => 'required'
         ]);
@@ -28,7 +28,7 @@ class CommentController extends Controller{
 
         $rankings = [1, 2, 3, 4, 5];
         foreach($rankings as $rank){
-            if($user->score >= $rank * 20){
+            if($user->score >= $rank * 20) {
                 $user->rankings()->syncWithoutDetaching([$rank]);
             }
         }

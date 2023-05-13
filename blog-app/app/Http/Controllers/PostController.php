@@ -5,7 +5,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class PostController extends Controller{
+class PostController extends Controller {
     public function index(){
         $posts = Post::where(function ($query) {
             $search = request('search');

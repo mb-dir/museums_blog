@@ -7,13 +7,13 @@ use App\Models\Ranking;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
-class UserController extends Controller{
+class UserController extends Controller {
     // Show Register/Create Form
     public function create(){
         return view('users.register');
     }
 
-    public function show(){
+    public function show() {
         $user_id = auth()->id();
         $user = User::with('rankings')->find($user_id);
         $rankings = $user->rankings;
@@ -21,7 +21,7 @@ class UserController extends Controller{
     }
 
     // Create New User
-    public function store(Request $request){
+    public function store(Request $request) {
         $formFields = $request->validate([
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
@@ -45,7 +45,7 @@ class UserController extends Controller{
     }
 
     // Logout User
-    public function logout(Request $request){
+    public function logout(Request $request) {
         auth()->logout();
 
         $request->session()->invalidate();
@@ -60,7 +60,7 @@ class UserController extends Controller{
     }
 
     // Authenticate User
-    public function authenticate(Request $request){
+    public function authenticate(Request $request) {
         $formFields = $request->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
