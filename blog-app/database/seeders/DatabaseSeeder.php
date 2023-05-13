@@ -14,11 +14,11 @@ class DatabaseSeeder extends Seeder {
         \App\Models\Comment::factory(1)->create();
 
         $rankings = [
-            ['name' => 'Rang 1', 'min_score' => 20],
-            ['name' => 'Rang 2', 'min_score' => 40],
-            ['name' => 'Rang 3', 'min_score' => 60],
-            ['name' => 'Rang 4', 'min_score' => 80],
-            ['name' => 'Rang 5', 'min_score' => 100],
+            ['name' => 'Nowicjusz Muzealny', 'min_score' => 20],
+            ['name' => 'Odkrywca Kultury', 'min_score' => 40],
+            ['name' => 'Ekspert Artystyczny', 'min_score' => 60],
+            ['name' => 'Wielki Kustosz', 'min_score' => 80],
+            ['name' => 'Arcymistrz Muzealnictwa', 'min_score' => 100],
         ];
 
         foreach ($rankings as $ranking) {
