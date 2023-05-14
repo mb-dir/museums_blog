@@ -25,6 +25,15 @@ class UserController extends Controller {
             'name' => ['required', 'min:3'],
             'email' => ['required', 'email', Rule::unique('users', 'email')],
             'password' => 'required|confirmed|min:6'
+        ], [
+            'name.required' => 'To pole jest wymagane.',
+            'name.min' => 'To pole musi mieć co najmniej :min znaki.',
+            'email.required' => 'Pole e-mail jest wymagane.',
+            'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
+            'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
+            'password.required' => 'Pole hasło jest wymagane.',
+            'password.confirmed' => 'Pole potwierdzenie hasła nie zgadza się z hasłem.',
+            'password.min' => 'Pole hasło musi mieć co najmniej :min znaków.',
         ]);
 
         // Hash Password
@@ -34,8 +43,6 @@ class UserController extends Controller {
 
         // Create User
         $user = User::create($formFields);
-
-        // $user->rankings()->attach([1,2,3,4,5]);
 
         // Login
         auth()->login($user);
@@ -63,6 +70,10 @@ class UserController extends Controller {
         $formFields = $request->validate([
             'email' => ['required', 'email'],
             'password' => 'required'
+        ], [
+            'email.required' => 'Pole e-mail jest wymagane.',
+            'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
+            'password.required' => 'Pole hasło jest wymagane.',
         ]);
 
         if(auth()->attempt($formFields)) {

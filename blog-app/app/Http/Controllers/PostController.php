@@ -35,6 +35,10 @@ class PostController extends Controller {
         'title'=>'required',
         'tags'=>'required',
         'content'=>'required',
+        ], [
+            'title.required' => 'To pole jest wymagane.',
+            'tags.required' => 'To pole jest wymagane.',
+            'content.required' => 'To pole jest wymagane.',
         ]);
         $formFields['date'] = date('Y-m-d');
         $formFields['user_id']=auth()->id();
@@ -72,6 +76,10 @@ class PostController extends Controller {
             'title'=>'required',
             'tags'=>'required',
             'content'=>'required',
+        ], [
+            'title.required' => 'To pole jest wymagane.',
+            'tags.required' => 'To pole jest wymagane.',
+            'content.required' => 'To pole jest wymagane.',
         ]);
         $post->update($formFields);
 

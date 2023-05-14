@@ -12,6 +12,8 @@ class CommentController extends Controller {
     public function store(Request $request, Post $post) {
         $validatedData = $request->validate([
             'content' => 'required'
+        ], [
+            'content.required' => 'To pole jest wymagane.',
         ]);
 
         $comment = new Comment;
