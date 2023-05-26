@@ -11,23 +11,6 @@ class DatabaseSeeder extends Seeder {
      * Seed the application's database.
      */
     public function run(): void {
-        User::factory(6)
-            ->create()
-            ->each(function ($user, $index) {
-                if ($index === 1 || $index === 2 || $index === 3) {
-                    $posts = Post::factory(4)->create(['user_id' => $user->id]);
-                }
-
-                if ($index === 3 || $index === 4 || $index === 8) {
-                    $comments = Comment::factory(4)->create(['user_id' => $user->id]);
-                }
-
-                $userScore = $user->posts()->sum('score') + $user->comments()->sum('score');
-                $user->score = $userScore;
-                $user->save();
-            });
-
-        // Remaining code for creating rankings
         $rankings = [
             ['name' => 'Nowicjusz Muzealny', 'min_score' => 20],
             ['name' => 'Odkrywca Kultury', 'min_score' => 40],
@@ -39,5 +22,28 @@ class DatabaseSeeder extends Seeder {
         foreach ($rankings as $ranking) {
             Ranking::create($ranking);
         }
+        User::factory(6)
+            ->create()
+            ->each(function ($user, $index) {
+                if ($index === 1 || $index === 2 || $index === 3) {
+                    Post::factory(4)->create(['user_id' => $user->id]);
+                }
+
+                if ($index === 3 || $index === 4 || $index === 8) {
+                    Comment::factory(4)->create(['user_id' => $user->id]);
+                }
+
+                $userScore = $user->posts()->sum('score') + $user->comments()->sum('score');
+                $user->score = $userScore;
+
+                $ranking_indexes = [1, 2, 3, 4, 5];
+                foreach($ranking_indexes as $rank){
+                    if($user->score >= $rank * 20){
+                        $user->rankings()->syncWithoutDetaching([$rank]);
+                    }
+                }
+
+                $user->save();
+        });
     }
 }
