@@ -1,6 +1,8 @@
 <?php
 
-namespace Database\Seeders;
+use App\Models\Post;
+use App\Models\User;
+use App\Models\Comment;
 use App\Models\Ranking;
 use Illuminate\Database\Seeder;
 
@@ -9,10 +11,23 @@ class DatabaseSeeder extends Seeder {
      * Seed the application's database.
      */
     public function run(): void {
-        \App\Models\User::factory(1)->create();
-        \App\Models\Post::factory(1)->create();
-        \App\Models\Comment::factory(1)->create();
-        // update user score after adding posts and commets
+        User::factory(6)
+            ->create()
+            ->each(function ($user, $index) {
+                if ($index === 1 || $index === 2 || $index === 3) {
+                    $posts = Post::factory(4)->create(['user_id' => $user->id]);
+                }
+
+                if ($index === 3 || $index === 4 || $index === 8) {
+                    $comments = Comment::factory(4)->create(['user_id' => $user->id]);
+                }
+
+                $userScore = $user->posts()->sum('score') + $user->comments()->sum('score');
+                $user->score = $userScore;
+                $user->save();
+            });
+
+        // Remaining code for creating rankings
         $rankings = [
             ['name' => 'Nowicjusz Muzealny', 'min_score' => 20],
             ['name' => 'Odkrywca Kultury', 'min_score' => 40],

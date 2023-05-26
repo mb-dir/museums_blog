@@ -5,13 +5,15 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory {
+class UserFactory extends Factory
+{
     protected $model = User::class;
 
-    public function definition(){
+    public function definition()
+    {
         $lastName = strtolower($this->faker->lastName);
         $domain = 'gmail.com';
-        $uniqueFakeEmail = "{$lastName}@{$domain}";
+        $uniqueFakeEmail = "{$lastName}" . $this->faker->randomNumber() . "@{$domain}";
 
         return [
             'name' => $lastName,
@@ -22,3 +24,4 @@ class UserFactory extends Factory {
         ];
     }
 }
+
