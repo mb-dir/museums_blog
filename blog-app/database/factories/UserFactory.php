@@ -8,10 +8,14 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class UserFactory extends Factory {
     protected $model = User::class;
 
-    public function definition() {
+    public function definition(){
+        $lastName = strtolower($this->faker->lastName);
+        $domain = 'gmail.com';
+        $uniqueFakeEmail = "{$lastName}@{$domain}";
+
         return [
-            'name' => $this->faker->name(),
-            'email' => $this->faker->unique()->safeEmail(),
+            'name' => $lastName,
+            'email' => $uniqueFakeEmail,
             'password' => bcrypt('password'),
             'score' => $this->faker->numberBetween(0, 10),
             'register_date' => now(),
