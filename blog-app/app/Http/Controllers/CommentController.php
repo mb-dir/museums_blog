@@ -21,11 +21,12 @@ class CommentController extends Controller {
         $comment->date = now();
         $comment->user_id = Auth::user()->id;
         $comment->post_id = $post->id;
+        $comment->score = 2;
         $comment->save();
 
         // Increase user score
         $user = User::find(auth()->id());
-        $user->score += 2;
+        $user->score += $comment->score;
         $user->update();
 
         $rankings = [1, 2, 3, 4, 5];

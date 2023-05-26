@@ -14,6 +14,7 @@ class CommentFactory extends Factory {
         return [
             'content' => $this->faker->paragraph,
             'date' => $this->faker->date(),
+            'score' => 2,
             'user_id' => User::inRandomOrder()->first()->id,
             'post_id' => Post::inRandomOrder()->first()->id,
         ];

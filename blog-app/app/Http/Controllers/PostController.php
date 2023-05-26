@@ -31,7 +31,7 @@ class PostController extends Controller {
 
     // create logic
     public function store(Request $request){
-        $formFields = $request->validate([
+        $validData = $request->validate([
         'title'=>'required',
         'tags'=>'required',
         'content'=>'required',
@@ -40,14 +40,20 @@ class PostController extends Controller {
             'tags.required' => 'To pole jest wymagane.',
             'content.required' => 'To pole jest wymagane.',
         ]);
-        $formFields['date'] = date('Y-m-d');
-        $formFields['user_id']=auth()->id();
 
-        Post::create($formFields);
+        $post = new Post;
+        $post->title = $validData['title'];
+        $post->tags = $validData['tags'];
+        $post->content = $validData['content'];
+        $post->date = now();
+        $post->user_id = auth()->id();
+        $post->score = 8;
+        $post->save();
+
 
         // Increase user score
         $user = User::find(auth()->id());
-        $user->score += 8;
+        $user->score += $post->score;
         $user->update();
 
         $rankings = [1, 2, 3, 4, 5];

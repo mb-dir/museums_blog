@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder {
         \App\Models\User::factory(1)->create();
         \App\Models\Post::factory(1)->create();
         \App\Models\Comment::factory(1)->create();
-
+        // update user score after adding posts and commets
         $rankings = [
             ['name' => 'Nowicjusz Muzealny', 'min_score' => 20],
             ['name' => 'Odkrywca Kultury', 'min_score' => 40],
