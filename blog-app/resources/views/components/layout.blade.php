@@ -27,14 +27,14 @@
             @auth
             <li>
                 <a href="/user-info" class="font-bold uppercase">
-                    Welcome {{auth()->user()->name}}
+                    Witaj {{auth()->user()->name}}
                 </a>
             </li>
             <li>
                 <form class="inline" method="POST" action="/logout">
                     @csrf
                     <button type="submit">
-                        Logout
+                        Wyloguj się
                     </button>
                 </form>
             </li>

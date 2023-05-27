@@ -5,10 +5,10 @@
                 Twoje dane
             </h2>
             <ul>
-                <li><span class="font-bold">nazwa</span>: {{auth()->user()->name}}</li>
-                <li><span class="font-bold">email</span>: {{auth()->user()->email}}</li>
-                <li><span class="font-bold">data_rejestracji</span>: {{auth()->user()->register_date}}</li>
-                <li><span class="font-bold">twój score</span>: {{auth()->user()->score}}</li>
+                <li><span class="font-bold">Nazwa</span>: {{auth()->user()->name}}</li>
+                <li><span class="font-bold">Email</span>: {{auth()->user()->email}}</li>
+                <li><span class="font-bold">Data rejestracji</span>: {{auth()->user()->register_date}}</li>
+                <li><span class="font-bold">Twój score</span>: {{auth()->user()->score}}</li>
             </ul>
             <h2 class="text-2xl font-bold uppercase my-3">Twoje rangi</h2>
             <ul>
