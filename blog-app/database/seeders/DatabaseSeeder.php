@@ -5,6 +5,8 @@ use App\Models\User;
 use App\Models\Comment;
 use App\Models\Ranking;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder {
     /**
@@ -45,5 +47,16 @@ class DatabaseSeeder extends Seeder {
 
                 $user->save();
         });
+        // create admin
+        DB::table('users')->insert([
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('admin'),
+            'register_date' => now(),
+            'score' => 0,
+            'role' => 'admin',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }

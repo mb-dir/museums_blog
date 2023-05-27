@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration {
             $table->string('password');
             $table->timestamp('register_date')->nullable();
             $table->integer('score')->default(0);
+            $table->string('role')->default("user");
             $table->timestamps();
         });
     }
