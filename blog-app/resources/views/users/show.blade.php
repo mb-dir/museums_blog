@@ -18,6 +18,21 @@
                 <li>{{ $rank->name }}</li>
                 @endforeach
             </ul>
+            @elseif (auth()->user()->role === 'admin')
+            <h2 class="text-2xl font-bold uppercase my-3">Admin panel</h2>
+            <h3 class="text-2xl font-bold uppercase my-3">Lista użytkowników</h3>
+            <ul>
+                @foreach($users as $user)
+                <li>
+                    {{ $user->name }}
+                    <form action="/users/{{$user->id}}" method="POST" class="inline">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="text-red-500 hover:text-red-700">Delete</button>
+                    </form>
+                </li>
+                @endforeach
+            </ul>
             @endif
         </div>
     </div>

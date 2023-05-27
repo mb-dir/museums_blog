@@ -12,12 +12,19 @@ class UserController extends Controller {
         return view('users.register');
     }
 
-    public function show() {
-        $user_id = auth()->id();
-        $user = User::with('rankings')->find($user_id);
+    public function show(){
+        $user = auth()->user();
+
+        if ($user->role === 'admin') {
+            // Retrieve all users with the role 'user'
+            $users = User::where('role', 'user')->get();
+        }
+
         $rankings = $user->rankings;
-        return view('users.show', ['rankings'=>$rankings]);
+
+        return view('users.show', compact('rankings', 'users'));
     }
+
 
     // Create New User
     public function store(Request $request) {
@@ -68,6 +75,22 @@ class UserController extends Controller {
         ];
 
         return redirect('/')->with('message', $message);
+    }
+
+    public function destroy(User $user){
+        // Check if the authenticated user is an admin
+        if (auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized');
+        }
+
+        // Delete the user
+        $user->delete();
+
+        $message = [
+            'content' => "Użytkownik został usunięty",
+            'type' => 'success'
+        ];
+        return redirect()->back()->with('message', $message);
     }
 
     // Show Login Form
