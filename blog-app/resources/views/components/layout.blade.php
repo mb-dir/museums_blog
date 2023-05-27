@@ -11,9 +11,12 @@
         tailwind.config = {
       theme: {
         extend: {
-          colors: {
-            purple: "#9B4F96",
-          },
+            colors: {
+                purple: "#9B4F96",
+            },
+            fontFamily: {
+                header: ['Baumans']
+            }
         },
       },
     };

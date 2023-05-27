@@ -1,6 +1,9 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Baumans&family=Dancing+Script&display=swap');
+</style>
 <section class="relative h-96 bg-purple flex flex-col justify-center align-center text-center space-y-4 mb-4">
     <div class="z-10">
-        <h1 class="text-6xl font-bold uppercase text-white">
+        <h1 class="text-6xl font-bold font-header uppercase text-white">
             Muzealne<span class="text-black"> Spojrzenie</span>
         </h1>
         <p class="text-2xl text-gray-100 font-bold my-4">
