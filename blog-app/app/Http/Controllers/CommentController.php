@@ -36,6 +36,11 @@ class CommentController extends Controller {
             }
         }
 
-        return redirect()->back()->with('message', 'Komentarz został dodany');
+        $message = [
+            'content' => "Komentarz został dodany",
+            'type' => 'success'
+        ];
+
+        return redirect()->back()->with('message', $message);
     }
 }

@@ -20,7 +20,26 @@
 </style>
 
 @if(session()->has('message'))
-<div class="card-animate fixed top-0 left-1/2 transform -translate-x-1/2 bg-purple text-white z-50 px-20 py-5 rounded">
-    <p>{{ session('message') }}</p>
+@php
+$message = session('message');
+$bgClass = '';
+switch ($message['type']) {
+case 'delete':
+$bgClass = 'bg-red-400';
+break;
+case 'success':
+$bgClass = 'bg-green-400';
+break;
+case 'info':
+$bgClass = 'bg-purple';
+break;
+default:
+$bgClass = 'bg-purple';
+break;
+}
+@endphp
+<div
+    class="card-animate fixed top-0 left-1/2 transform -translate-x-1/2 {{ $bgClass }} text-white z-50 px-20 py-5 rounded">
+    <p>{{ $message['content'] }}</p>
 </div>
 @endif

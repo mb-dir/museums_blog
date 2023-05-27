@@ -47,7 +47,12 @@ class UserController extends Controller {
         // Login
         auth()->login($user);
 
-        return redirect('/')->with('message', 'Twoje konto zostało utworzone, zostałeś automatycznie zalogowany');
+        $message = [
+            'content' => "Twoje konto zostało utworzone, zostałeś automatycznie zalogowany",
+            'type' => 'success'
+        ];
+
+        return redirect('/')->with('message', $message);
     }
 
     // Logout User
@@ -57,7 +62,12 @@ class UserController extends Controller {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/')->with('message', 'Zostałeś wylogowany!');
+        $message = [
+            'content' => "Zostałeś wylogowany",
+            'type' => 'info'
+        ];
+
+        return redirect('/')->with('message', $message);
     }
 
     // Show Login Form
@@ -79,7 +89,12 @@ class UserController extends Controller {
         if(auth()->attempt($formFields)) {
             $request->session()->regenerate();
 
-            return redirect('/')->with('message', 'Zostałeś poprawnie zalogowany!');
+            $message = [
+                'content' => "Zostałeś poprawnie zalogowany!",
+                'type' => 'success'
+            ];
+
+            return redirect('/')->with('message', $message);
         }
 
         return back()->withErrors(['email' => 'Błędne dane'])->onlyInput('email');

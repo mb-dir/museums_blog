@@ -62,13 +62,21 @@ class PostController extends Controller {
                 $user->rankings()->syncWithoutDetaching([$rank]);
             }
         }
+        $message = [
+            'content' => "Post został utworzony",
+            'type' => 'success'
+        ];
 
-        return Redirect('/')->with('message', "Post został utworzony");
+        return Redirect('/')->with('message', $message);
     }
 
     public function delete(Post $post){
         $post->delete();
-        return redirect('/')->with('message', "Post zosatł usunięty");
+        $message = [
+            'content' => "Post został usunięty",
+            'type' => 'delete'
+        ];
+        return redirect('/')->with('message', $message);
     }
 
     public function edit(Post $post){
@@ -89,6 +97,11 @@ class PostController extends Controller {
         ]);
         $post->update($formFields);
 
-        return redirect('/')->with('message', "Post został zaaktualizowany");
+        $message = [
+            'content' => "Post został zaaktualizowany",
+            'type' => 'success'
+        ];
+
+        return redirect('/')->with('message', $message);
     }
 }
