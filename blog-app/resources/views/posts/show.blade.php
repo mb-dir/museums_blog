@@ -7,8 +7,8 @@
 
                 <x-tags :tags="$post->tags" />
 
-                @if (Auth::check() && $post->user_id == Auth::user()->id)
-                <p>Możesz edytować swój post</p>
+                @if (Auth::check() && $post->user_id == Auth::user()->id || Auth::user()->role === 'admin')
+                <p>Możesz edytować post</p>
                 <a href="/posts/{{$post->id}}/edit">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"
                         version="1.1" id="Capa_1" width="20px" height="20px" viewBox="0 0 494.936 494.936"
@@ -26,7 +26,7 @@
                 <form action="/posts/{{$post->id}}" method="POST">
                     @csrf
                     @method('DELETE')
-                    <p>Możesz usunąć swój post</p>
+                    <p>Możesz usunąć post</p>
                     <button type="submit" class="text-red-500 hover:text-red-700">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ff0000" width="24"
                             height="24">

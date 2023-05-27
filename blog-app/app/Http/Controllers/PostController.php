@@ -14,7 +14,7 @@ class PostController extends Controller {
             }
         })
         ->orderByDesc('created_at')
-        ->paginate(4);
+        ->paginate(8);
         return view('posts.index', ['posts'=>$posts]);
     }
 

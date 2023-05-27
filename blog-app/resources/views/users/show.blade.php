@@ -5,17 +5,20 @@
                 Twoje dane
             </h2>
             <ul>
-                <li><span class="font-bold">Nazwa</span>: {{auth()->user()->name}}</li>
-                <li><span class="font-bold">Email</span>: {{auth()->user()->email}}</li>
-                <li><span class="font-bold">Data rejestracji</span>: {{auth()->user()->register_date}}</li>
-                <li><span class="font-bold">Twój score</span>: {{auth()->user()->score}}</li>
+                <li><span class="font-bold">Nazwa</span>: {{ auth()->user()->name }}</li>
+                <li><span class="font-bold">Email</span>: {{ auth()->user()->email }}</li>
+                <li><span class="font-bold">Data rejestracji</span>: {{ auth()->user()->register_date }}</li>
+                <li><span class="font-bold">Twój score</span>: {{ auth()->user()->score }}</li>
+                <li><span class="font-bold">Ranga</span>: {{ auth()->user()->role }}</li>
             </ul>
+            @if (auth()->user()->role === 'user')
             <h2 class="text-2xl font-bold uppercase my-3">Twoje rangi</h2>
             <ul>
                 @foreach($rankings as $rank)
-                <li>{{$rank->name}}</li>
+                <li>{{ $rank->name }}</li>
                 @endforeach
             </ul>
+            @endif
         </div>
     </div>
 </x-layout>
