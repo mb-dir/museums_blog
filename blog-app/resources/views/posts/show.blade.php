@@ -7,7 +7,8 @@
 
                 <x-tags :tags="$post->tags" />
 
-                @if (Auth::check() && $post->user_id == Auth::user()->id || Auth::user()->role === 'admin')
+                @if (Auth::check() && $post->user_id == Auth::user()->id || (Auth::check() && Auth::user()->role ===
+                'admin'))
                 <p>Możesz edytować post</p>
                 <a href="/posts/{{$post->id}}/edit">
                     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"

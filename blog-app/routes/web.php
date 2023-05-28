@@ -59,5 +59,8 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
 // Delete user
+Route::get('/users/{user}', [UserController::class, 'showUser']);
+
+// Delete user
 Route::delete('/users/{user}', [UserController::class, 'destroy']);
 

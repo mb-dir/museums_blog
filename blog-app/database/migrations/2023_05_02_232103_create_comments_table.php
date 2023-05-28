@@ -10,19 +10,18 @@ class CreateCommentsTable extends Migration {
      *
      * @return void
      */
-    public function up() {
+    public function up(){
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('content');
             $table->timestamp('date')->useCurrent();
             $table->integer('score');
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('post_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

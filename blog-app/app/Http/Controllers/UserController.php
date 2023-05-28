@@ -14,6 +14,7 @@ class UserController extends Controller {
 
     public function show(){
         $user = auth()->user();
+        $users = null;
 
         if ($user->role === 'admin') {
             // Retrieve all users with the role 'user'
@@ -22,7 +23,7 @@ class UserController extends Controller {
 
         $rankings = $user->rankings;
 
-        return view('users.show', compact('rankings', 'users'));
+        return view('users.show', ['users'=>$users, 'rankings'=>$rankings]);
     }
 
 
@@ -90,7 +91,7 @@ class UserController extends Controller {
             'content' => "Użytkownik został usunięty",
             'type' => 'success'
         ];
-        return redirect()->back()->with('message', $message);
+        return redirect("/user-info")->with('message', $message);
     }
 
     // Show Login Form
@@ -121,5 +122,11 @@ class UserController extends Controller {
         }
 
         return back()->withErrors(['email' => 'Błędne dane'])->onlyInput('email');
+    }
+
+    // Show user for admin
+    public function showUser(User $user){
+        $rankings = $user->rankings;
+        return view('users.admin.show', ['user'=>$user, 'rankings'=>$rankings]);
     }
 }

@@ -11,7 +11,7 @@ class CreatePostsTable extends Migration
      *
      * @return void
      */
-    public function up() {
+    public function up(){
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('title');
@@ -19,11 +19,11 @@ class CreatePostsTable extends Migration
             $table->string('tags');
             $table->integer('score');
             $table->date('date');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
