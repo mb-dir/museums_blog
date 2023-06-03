@@ -21,11 +21,14 @@
       },
     };
     </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baumans&family=Dancing+Script&display=swap');
+    </style>
 </head>
 
 <body>
     <nav class="sticky top-0 w-full z-20 bg-gray-50 h-14 flex justify-between items-center items-center">
-        <a href="/" class="ml-4 font-bold hover:text-purple">Strona główna</a>
+        <a href="/" class="ml-4 font-bold hover:text-purple font-header">Muzealne Spojrzenie</a>
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
             <li>
