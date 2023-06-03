@@ -26,7 +26,7 @@
             <h2 class="text-2xl font-bold uppercase my-3">Rangi</h2>
             <ul>
                 @foreach($rankings as $rank)
-                <li>{{ $rank->name }}</li>
+                <li>{{ $rank->name }} {{$rank->emoji}}</li>
                 @endforeach
             </ul>
         </div>

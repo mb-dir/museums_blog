@@ -15,12 +15,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $rankings = [
-            ['name' => 'Nowicjusz Muzealny', 'min_score' => 20],
-            ['name' => 'Odkrywca Kultury', 'min_score' => 40],
-            ['name' => 'Ekspert Artystyczny', 'min_score' => 60],
-            ['name' => 'Wielki Kustosz', 'min_score' => 80],
-            ['name' => 'Arcymistrz Muzealnictwa', 'min_score' => 100],
+            ['name' => 'Nowicjusz Muzealny', 'min_score' => 20, 'emoji' => '🥉'],
+            ['name' => 'Odkrywca Kultury', 'min_score' => 40, 'emoji' => '🥈'],
+            ['name' => 'Ekspert Artystyczny', 'min_score' => 60, 'emoji' => '🥇'],
+            ['name' => 'Wielki Kustosz', 'min_score' => 80, 'emoji' => '🏆'],
+            ['name' => 'Arcymistrz Muzealnictwa', 'min_score' => 100, 'emoji' => '🌟'],
         ];
+
 
         foreach ($rankings as $ranking) {
             Ranking::create($ranking);
