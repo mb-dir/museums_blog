@@ -2,7 +2,7 @@
     <div class="text-center bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24 mb-48">
         <div class="mb-6 flex items-center justify-center flex-col">
             <h2 class="text-2xl font-bold uppercase my-3">
-                Profil użytkowniak {{$user->name}}
+                Profil użytkownika {{$user->name}}
             </h2>
             <p>Usuń użytkownika</p>
             <form action=" /users/{{$user->id}}" method="POST" class="inline">
@@ -27,6 +27,12 @@
             <ul>
                 @foreach($rankings as $rank)
                 <li>{{ $rank->name }} {{$rank->emoji}}</li>
+                @endforeach
+            </ul>
+            <h2 class="text-2xl font-bold uppercase my-3">Posty</h2>
+            <ul class="list-disc">
+                @foreach($userPosts as $post)
+                <li><a class="text-blue-500" href="/posts/{{$post->id}}">{{ $post->title }}</a></li>
                 @endforeach
             </ul>
         </div>

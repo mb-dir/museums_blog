@@ -15,6 +15,7 @@ class UserController extends Controller {
     public function show(){
         $user = auth()->user();
         $users = null;
+        $userPosts = $user->posts;
 
         if ($user->role === 'admin') {
             // Retrieve all users with the role 'user'
@@ -23,7 +24,7 @@ class UserController extends Controller {
 
         $rankings = $user->rankings;
 
-        return view('users.show', ['users'=>$users, 'rankings'=>$rankings]);
+        return view('users.show', ['users'=>$users, 'rankings'=>$rankings, 'userPosts'=>$userPosts]);
     }
 
 
@@ -127,6 +128,7 @@ class UserController extends Controller {
     // Show user for admin
     public function showUser(User $user){
         $rankings = $user->rankings;
-        return view('users.admin.show', ['user'=>$user, 'rankings'=>$rankings]);
+        $userPosts = $user->posts;
+        return view('users.admin.show', ['user'=>$user, 'rankings'=>$rankings, 'userPosts'=>$userPosts]);
     }
 }
