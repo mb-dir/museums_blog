@@ -4,6 +4,28 @@
             <h2 class="text-2xl font-bold uppercase my-3">
                 Profil użytkownika {{$user->name}}
             </h2>
+            <ul>
+                <li><span class="font-bold">Nazwa</span>: {{$user->name }}</li>
+                <li><span class="font-bold">Email</span>: {{ $user->email }}</li>
+                <li><span class="font-bold">Data rejestracji</span>: {{ $user->register_date }}</li>
+                <li><span class="font-bold">Score</span>: {{ $user->score }}</li>
+                <li><span class="font-bold">Rola</span>: {{ $user->role }}</li>
+            </ul>
+            <h2 class="text-2xl font-bold uppercase my-3">Rangi</h2>
+            <ul>
+                @foreach($rankings as $rank)
+                <li>{{ $rank->name }} {{$rank->emoji}}</li>
+                @endforeach
+            </ul>
+            <h2 class="text-2xl font-bold uppercase my-3">Posty</h2>
+            <ul class="list-disc">
+                @foreach($userPosts as $post)
+                <li><a class="text-blue-500" href="/posts/{{$post->id}}">{{ $post->title }}</a></li>
+                @endforeach
+            </ul>
+
+            <h2 class="text-2xl font-bold uppercase my-3">Dostępne akcje</h2>
+
             <p>Usuń użytkownika</p>
             <form action=" /users/{{$user->id}}" method="POST" class="inline">
                 @csrf
@@ -32,25 +54,6 @@
                     </g>
                 </svg>
             </a>
-            <ul>
-                <li><span class="font-bold">Nazwa</span>: {{$user->name }}</li>
-                <li><span class="font-bold">Email</span>: {{ $user->email }}</li>
-                <li><span class="font-bold">Data rejestracji</span>: {{ $user->register_date }}</li>
-                <li><span class="font-bold">Score</span>: {{ $user->score }}</li>
-                <li><span class="font-bold">Rola</span>: {{ $user->role }}</li>
-            </ul>
-            <h2 class="text-2xl font-bold uppercase my-3">Rangi</h2>
-            <ul>
-                @foreach($rankings as $rank)
-                <li>{{ $rank->name }} {{$rank->emoji}}</li>
-                @endforeach
-            </ul>
-            <h2 class="text-2xl font-bold uppercase my-3">Posty</h2>
-            <ul class="list-disc">
-                @foreach($userPosts as $post)
-                <li><a class="text-blue-500" href="/posts/{{$post->id}}">{{ $post->title }}</a></li>
-                @endforeach
-            </ul>
         </div>
     </div>
 </x-layout>

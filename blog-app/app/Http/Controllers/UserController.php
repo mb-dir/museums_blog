@@ -105,7 +105,7 @@ class UserController extends Controller {
     public function update(Request $request, User $user){
         $formFields = $request->validate([
             'name'=>'required',
-            'email'=>['required', 'email', Rule::unique('users', 'email')],
+            'email'=>['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
         ], [
             'name.required' => 'To pole jest wymagane.',
             'email.required' => 'Pole e-mail jest wymagane.',
