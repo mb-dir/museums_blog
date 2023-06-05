@@ -60,6 +60,17 @@ class DatabaseSeeder extends Seeder
             $user->save();
         }
 
+        // Create one blocked user
+        User::create([
+            'name' => 'block',
+            'email' => 'block@gmail.com',
+            'password' => Hash::make('password'),
+            'register_date' => now(),
+            'score' => 0,
+            'role' => 'user',
+            'status' => "blocked"
+        ]);
+
         // Create admin
         User::create([
             'name' => 'admin',

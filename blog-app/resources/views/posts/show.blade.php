@@ -68,6 +68,7 @@
         </div>
     </div>
     <div class="flex mx-auto items-center justify-center mt-10 mx-8 mb-4 max-w-lg">
+        @if (auth()->user()->status === 'active')
         <form action="/posts/{{$post->id}}/comments" method="POST"
             class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
             @csrf
@@ -83,5 +84,11 @@
                 </div>
             </div>
         </form>
+        @else
+        <p class="text-center py-32">Wygląda na to, że zostałeś zablokowany i nie możesz dodawać
+            komentarzy. Skontaktuj
+            się z
+            administratorem.</p>
+        @endif
     </div>
 </x-layout>
