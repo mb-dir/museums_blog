@@ -32,7 +32,7 @@
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
             <li>
-                <a href="/user-info" class="font-bold uppercase">
+                <a href="/user-info/{{auth()->user()->id}}" class="font-bold uppercase">
                     Witaj {{auth()->user()->name}}
                 </a>
             </li>

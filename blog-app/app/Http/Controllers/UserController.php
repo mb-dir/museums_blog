@@ -12,8 +12,7 @@ class UserController extends Controller {
         return view('users.register');
     }
 
-    public function show(){
-        $user = auth()->user();
+    public function show(User $user){
         $users = null;
         $userPosts = $user->posts;
 
@@ -92,7 +91,35 @@ class UserController extends Controller {
             'content' => "Użytkownik został usunięty",
             'type' => 'success'
         ];
-        return redirect("/user-info")->with('message', $message);
+        return redirect('/user-info/'.auth()->user()->id)->with('message', $message);
+    }
+
+    //Edit user view
+    public function edit(User $user){
+        return view('users.edit', [
+        "user"=> $user
+        ]);
+    }
+
+    // Update user logic
+    public function update(Request $request, User $user){
+        $formFields = $request->validate([
+            'name'=>'required',
+            'email'=>['required', 'email', Rule::unique('users', 'email')],
+        ], [
+            'name.required' => 'To pole jest wymagane.',
+            'email.required' => 'Pole e-mail jest wymagane.',
+            'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
+            'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
+        ]);
+        $user->update($formFields);
+
+        $message = [
+            'content' => "Profil został zaaktualizowany",
+            'type' => 'success'
+        ];
+
+        return redirect('/')->with('message', $message);
     }
 
     // Show Login Form

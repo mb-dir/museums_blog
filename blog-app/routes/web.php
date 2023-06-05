@@ -47,7 +47,7 @@ Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 Route::post('/users', [UserController::class, 'store']);
 
 // Show user info
-Route::get('/user-info', [UserController::class, 'show'])->middleware('auth');
+Route::get('/user-info/{user}', [UserController::class, 'show'])->middleware('auth');
 
 // Log User Out
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
@@ -59,8 +59,15 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
 // Delete user
-Route::get('/users/{user}', [UserController::class, 'showUser']);
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware("auth");
 
-// Delete user
-Route::delete('/users/{user}', [UserController::class, 'destroy']);
+// Show user for admin
+Route::get('/users/{user}', [UserController::class, 'showUser'])->middleware("auth");
+
+// Update user view
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('auth');
+
+// Update user
+Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth');
+
 

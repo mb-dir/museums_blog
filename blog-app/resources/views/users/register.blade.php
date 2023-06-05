@@ -12,7 +12,7 @@
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="inline-block text-lg mb-2">
-                        Imie
+                        Nazwa użytkownika
                     </label>
                     <input type="text" id="name" class="border border-gray-200 rounded p-2 w-full" name="name"
                         value="{{old('name')}}" />
