@@ -10,6 +10,7 @@
                 <li><span class="font-bold">Data rejestracji</span>: {{ $user->register_date }}</li>
                 <li><span class="font-bold">Score</span>: {{ $user->score }}</li>
                 <li><span class="font-bold">Rola</span>: {{ $user->role }}</li>
+                <li><span class="font-bold">Status</span>: {{ $user->status }}</li>
             </ul>
             <h2 class="text-2xl font-bold uppercase my-3">Rangi</h2>
             <ul>
@@ -54,6 +55,26 @@
                     </g>
                 </svg>
             </a>
+
+            <p>
+                @if ($user->status === 'active')
+                Zablokuj użytkownika
+                @else
+                Odblokuj użytkwnika
+                @endif
+            </p>
+            <form action="/users/status-change/{{$user->id}}" method="POST" class="inline">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M6.5 5.5l-4 4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        <path d="M17.5 5.5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </form>
         </div>
     </div>
 </x-layout>

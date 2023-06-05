@@ -10,6 +10,7 @@
                 <li><span class="font-bold">Data rejestracji</span>: {{ auth()->user()->register_date }}</li>
                 <li><span class="font-bold">Twój score</span>: {{ auth()->user()->score }}</li>
                 <li><span class="font-bold">Rola</span>: {{ auth()->user()->role }}</li>
+                <li><span class="font-bold">Status</span>: {{ auth()->user()->status }}</li>
             </ul>
             @if (auth()->user()->role === 'user')
             <h2 class="text-2xl font-bold uppercase my-3">Twoje rangi</h2>

@@ -158,4 +158,21 @@ class UserController extends Controller {
         $userPosts = $user->posts;
         return view('users.admin.show', ['user'=>$user, 'rankings'=>$rankings, 'userPosts'=>$userPosts]);
     }
+
+    // Block user as admin
+    public function changeUserStatus(User $user){
+        $currentStatus = $user->status;
+        if($currentStatus === 'active'){
+            $user->status = 'blocked';
+        }else{
+            $user->status = 'active';
+        }
+        $user->save();
+
+        $message = [
+            'content' => "Status użytkwnika został zmieniony",
+            'type' => 'success'
+        ];
+        return back()->with('message', $message);
+    }
 }

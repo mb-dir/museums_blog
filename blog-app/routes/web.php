@@ -70,4 +70,7 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('a
 // Update user
 Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth');
 
+// Change user status
+Route::put('/users/status-change/{user}', [UserController::class, 'changeUserStatus'])->middleware('auth');
+
 
