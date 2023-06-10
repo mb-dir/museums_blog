@@ -13,7 +13,14 @@ class PostFactory extends Factory {
         return [
             'title' => $this->faker->sentence(5),
             'content' => $this->faker->paragraphs(3, true),
-            'tags' => implode(', ', $this->faker->words(3)),
+            'tags' => implode(', ', $this->faker->randomElements([
+                'Artefakt', 'Ekspozycja', 'Antyk', 'Archeologia', 'Dziedzictwo',
+                'Archiwum', 'Kultura', 'Cywilizacja', 'Relikwia', 'Historyk',
+                'Galeria', 'Konserwacja', 'Odkrycie', 'Archeolog', 'Restauracja',
+                'Starożytny', 'Oś czasu', 'Dokument', 'Artefakty', 'Historiografia',
+                'Ruiny', 'Archeologiczny', 'Kustosz', 'Archiwa', 'Zabytki',
+                'Manuskrypt', 'Dzieło sztuki', 'Paleontologia', 'Antropologia', 'Konserwacja'
+            ], 3)),
             'score' => 8,
             "photo" => "example.png",
             'date' => $this->faker->date(),

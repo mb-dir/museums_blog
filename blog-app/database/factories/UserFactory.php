@@ -13,7 +13,7 @@ class UserFactory extends Factory
     {
         $lastName = strtolower($this->faker->lastName);
         $domain = 'gmail.com';
-        $uniqueFakeEmail = "{$lastName}" . $this->faker->randomNumber() . "@{$domain}";
+        $uniqueFakeEmail = "{$lastName}" . $this->faker->numberBetween(0, 999) . "@{$domain}";
 
         return [
             'name' => $lastName,
