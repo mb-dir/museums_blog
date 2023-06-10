@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->string('tags');
             $table->integer('score');
             $table->date('date');
+            $table->string('photo');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });

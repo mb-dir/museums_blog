@@ -13,6 +13,7 @@ class Post extends Model {
         'content',
         'tags',
         'date',
+        "photo",
         'user_id',
     ];
 

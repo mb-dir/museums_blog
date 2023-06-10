@@ -15,6 +15,7 @@ class PostFactory extends Factory {
             'content' => $this->faker->paragraphs(3, true),
             'tags' => implode(', ', $this->faker->words(3)),
             'score' => 8,
+            "photo" => "example.png",
             'date' => $this->faker->date(),
             'user_id' => User::factory(),
         ];
