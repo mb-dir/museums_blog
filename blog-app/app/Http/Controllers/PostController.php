@@ -32,22 +32,32 @@ class PostController extends Controller {
     // create logic
     public function store(Request $request){
         $validData = $request->validate([
-        'title'=>'required',
-        'tags'=>'required',
-        'content'=>'required',
+            'title' => 'required',
+            'tags' => 'required',
+            'content' => 'required',
+            'photo' => 'required|image|mimes:jpeg,png|max:2048',
         ], [
             'title.required' => 'To pole jest wymagane.',
             'tags.required' => 'To pole jest wymagane.',
             'content.required' => 'To pole jest wymagane.',
+            'photo.required' => 'To pole jest wymagane.',
+            'photo.image' => 'Prześlij obraz w formacie JPEG lub PNG.',
+            'photo.mimes' => 'Prześlij obraz w formacie JPEG lub PNG.',
+            'photo.max' => 'Maksymalny rozmiar obrazu to 2 MB.',
         ]);
+        $validData['photo']=$request->file('photo')->store('logos', 'public');
 
+        // Create a new post instance
         $post = new Post;
         $post->title = $validData['title'];
         $post->tags = $validData['tags'];
         $post->content = $validData['content'];
+        $post->photo = $validData['photo'];
         $post->date = now();
         $post->user_id = auth()->id();
         $post->score = 8;
+
+
         $post->save();
 
 
