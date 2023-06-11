@@ -13,7 +13,7 @@ class CommentFactory extends Factory {
     public function definition() {
         return [
             'content' => $this->faker->paragraph,
-            'date' => $this->faker->date(),
+            'date' => now(),
             'score' => 2,
             'user_id' => User::factory(),
             'post_id' => Post::factory(),
