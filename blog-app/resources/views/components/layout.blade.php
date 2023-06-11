@@ -46,10 +46,10 @@
             </li>
             @else
             <li>
-                <a href="register" class="hover:text-purple">Rejestracja</a>
+                <a href="/register" class="hover:text-purple">Rejestracja</a>
             </li>
             <li>
-                <a href="login" class="hover:text-purple">
+                <a href="/login" class="hover:text-purple">
                     Logowanie</a>
             </li>
             @endauth
