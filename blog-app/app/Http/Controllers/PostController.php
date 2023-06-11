@@ -112,6 +112,6 @@ class PostController extends Controller {
             'type' => 'success'
         ];
 
-        return redirect('/')->with('message', $message);
+        return redirect('/posts/'.$post->id)->with('message', $message);
     }
 }

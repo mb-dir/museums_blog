@@ -119,7 +119,12 @@ class UserController extends Controller {
             'type' => 'success'
         ];
 
-        return redirect('/')->with('message', $message);
+        $isAdmin = auth()->user()->role === "admin";
+        if($isAdmin){
+            return redirect('/user-info/'.auth()->user()->id)->with('message', $message);
+        }else{
+            return redirect('/user-info/'.$user->id)->with('message', $message);
+        }
     }
 
     // Show Login Form
