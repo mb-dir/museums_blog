@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller {
     // Show Register/Create Form
@@ -13,17 +14,21 @@ class UserController extends Controller {
     }
 
     public function show(User $user){
-        $users = null;
-        $userPosts = $user->posts;
+        if (auth()->user()->id === $user->id) {
+            $users = null;
+            $userPosts = $user->posts;
 
-        if ($user->role === 'admin') {
-            // Retrieve all users with the role 'user'
-            $users = User::where('role', 'user')->get();
+            if ($user->role === 'admin') {
+                // Retrieve all users with the role 'user'
+                $users = User::where('role', 'user')->get();
+            }
+
+            $rankings = $user->rankings;
+
+            return view('users.show', ['users'=>$users, 'rankings'=>$rankings, 'userPosts'=>$userPosts]);
+        } else {
+            abort(403);
         }
-
-        $rankings = $user->rankings;
-
-        return view('users.show', ['users'=>$users, 'rankings'=>$rankings, 'userPosts'=>$userPosts]);
     }
 
 
@@ -80,7 +85,7 @@ class UserController extends Controller {
 
     public function destroy(User $user){
         // Check if the authenticated user is an admin
-        if (auth()->user()->role !== 'admin') {
+        if (!Gate::allows('is-admin')) {
             abort(403, 'Unauthorized');
         }
 
@@ -96,34 +101,42 @@ class UserController extends Controller {
 
     //Edit user view
     public function edit(User $user){
-        return view('users.edit', [
-        "user"=> $user
-        ]);
+        if (auth()->user()->id === $user->id || auth()->user()->role === 'admin') {
+            return view('users.edit', [
+            "user"=> $user
+            ]);
+        }else{
+            abort(403, 'Unauthorized');
+        }
     }
 
     // Update user logic
     public function update(Request $request, User $user){
-        $formFields = $request->validate([
-            'name'=>'required',
-            'email'=>['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-        ], [
-            'name.required' => 'To pole jest wymagane.',
-            'email.required' => 'Pole e-mail jest wymagane.',
-            'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
-            'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
-        ]);
-        $user->update($formFields);
+        if (auth()->user()->id === $user->id || auth()->user()->role === 'admin') {
+            $formFields = $request->validate([
+                'name'=>'required',
+                'email'=>['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
+            ], [
+                'name.required' => 'To pole jest wymagane.',
+                'email.required' => 'Pole e-mail jest wymagane.',
+                'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
+                'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
+            ]);
+            $user->update($formFields);
 
-        $message = [
-            'content' => "Profil został zaaktualizowany",
-            'type' => 'success'
-        ];
+            $message = [
+                'content' => "Profil został zaaktualizowany",
+                'type' => 'success'
+            ];
 
-        $isAdmin = auth()->user()->role === "admin";
-        if($isAdmin){
-            return redirect('/user-info/'.auth()->user()->id)->with('message', $message);
+            $isAdmin = auth()->user()->role === "admin";
+            if($isAdmin){
+                return redirect('/user-info/'.auth()->user()->id)->with('message', $message);
+            }else{
+                return redirect('/user-info/'.$user->id)->with('message', $message);
+            }
         }else{
-            return redirect('/user-info/'.$user->id)->with('message', $message);
+            abort(403, 'Unauthorized');
         }
     }
 
@@ -159,6 +172,9 @@ class UserController extends Controller {
 
     // Show user for admin
     public function showUser(User $user){
+        if (!Gate::allows('is-admin')) {
+            abort(403, 'Unauthorized');
+        }
         $rankings = $user->rankings;
         $userPosts = $user->posts;
         return view('users.admin.show', ['user'=>$user, 'rankings'=>$rankings, 'userPosts'=>$userPosts]);
@@ -166,6 +182,9 @@ class UserController extends Controller {
 
     // Block user as admin
     public function changeUserStatus(User $user){
+        if (!Gate::allows('is-admin')) {
+            abort(403, 'Unauthorized');
+        }
         $currentStatus = $user->status;
         if($currentStatus === 'active'){
             $user->status = 'blocked';

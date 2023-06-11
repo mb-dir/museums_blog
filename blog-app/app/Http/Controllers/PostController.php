@@ -32,7 +32,6 @@ class PostController extends Controller {
 
     // create logic
     public function store(Request $request){
-
         if (Gate::allows('is-active')) {
             $validData = $request->validate([
             'title' => 'required',
@@ -61,7 +60,6 @@ class PostController extends Controller {
             $post->score = 8;
 
             $post->save();
-
 
             // Increase user score
             $user = User::find(auth()->id());

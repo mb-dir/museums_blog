@@ -30,6 +30,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role === "admin" || ($user->id === $post->user_id && $user->status === "active");
         });
 
+        Gate::define('is-admin', function (User $user) {
+            return $user->role === "admin";
+        });
+
         Gate::define('is-active', function (User $user) {
             return $user->status === "active";
         });
