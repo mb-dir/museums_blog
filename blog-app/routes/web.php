@@ -16,7 +16,7 @@ use App\Http\Controllers\CommentController;
 |
 */
 
-// Show all posts
+// Show all posts(main page)
 Route::get('/', [PostController::class, 'index']);
 
 // Create post view

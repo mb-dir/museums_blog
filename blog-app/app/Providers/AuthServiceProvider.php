@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 // use Illuminate\Support\Facades\Gate;
+use App\Models\Post;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -21,6 +24,14 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->registerPolicies();
+
+        Gate::define('post-operation', function (User $user, Post $post) {
+            return $user->role === "admin" || ($user->id === $post->user_id && $user->status === "active");
+        });
+
+        Gate::define('is-active', function (User $user) {
+            return $user->status === "active";
+        });
     }
 }
