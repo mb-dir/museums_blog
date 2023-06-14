@@ -12,8 +12,9 @@
                 @csrf
                 <div class="mb-6">
                     <label for="title" class="inline-block text-lg mb-2">Tytuł</label>
-                    <input type="text" id="title" class="border border-gray-200 rounded p-2 w-full" name="title"
-                        placeholder="Tytuł..." value="{{old('title')}}" />
+                    <input required minlength="3" maxlength="255" type="text" id="title"
+                        class="border border-gray-200 rounded p-2 w-full" name="title" placeholder="Tytuł..."
+                        value="{{old('title')}}" />
                     @error('title')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -23,8 +24,9 @@
                     <label for="tags" class="inline-block text-lg mb-2">
                         Tagi (oddzielone przecinkiem)
                     </label>
-                    <input type="text" id="tags" class="border border-gray-200 rounded p-2 w-full" name="tags"
-                        placeholder="tag1, tag2" value="{{old('tags')}}" />
+                    <input pattern="^[a-zA-Z]+(,\s[a-zA-Z]+)*$" required type="text" id="tags"
+                        class="border border-gray-200 rounded p-2 w-full" name="tags" placeholder="tag1, tag2"
+                        value="{{old('tags')}}" />
                     @error('tags')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -45,7 +47,7 @@
                     <label for="photo" class="inline-block text-lg mb-2">
                         Zdjęcie
                     </label>
-                    <input type="file" id="photo" name="photo" accept="image/jpeg, image/png" />
+                    <input required type="file" id="photo" name="photo" accept="image/jpeg, image/png" />
                     @error('photo')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -67,4 +69,16 @@
             @endif
         </div>
     </div>
+    <script>
+        const photoInput = document.querySelector("#photo");
+        photoInput.addEventListener("change", ()=>{
+            const file = photoInput.files[0];
+            const maxSizeInBytes = 1024 * 1024 * 2; // 2MB
+            alert(1);
+            if (file.size > maxSizeInBytes) {
+            alert("Wybrany obrazek jest zbyt duży. Maksymalny rozmiar to 2MB.");
+            photoInput.value = "";
+            }
+        })
+    </script>
 </x-layout>

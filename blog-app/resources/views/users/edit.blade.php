@@ -18,8 +18,8 @@
                     <label for="name" class="inline-block text-lg mb-2">
                         Nazwa użytkownika
                     </label>
-                    <input type="text" id="name" class="border border-gray-200 rounded p-2 w-full" name="name"
-                        value="{{$user->name}}" />
+                    <input required minlength="3" maxlength="50" type="text" id="name"
+                        class="border border-gray-200 rounded p-2 w-full" name="name" value="{{$user->name}}" />
                     @error('name')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -27,8 +27,8 @@
 
                 <div class="mb-6">
                     <label for="email" class="inline-block text-lg mb-2">Email</label>
-                    <input type="email" id="email" class="border border-gray-200 rounded p-2 w-full" name="email"
-                        value="{{$user->email}}" />
+                    <input required type="email" id="email" class="border border-gray-200 rounded p-2 w-full"
+                        name="email" value="{{$user->email}}" />
                     @error('email')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror

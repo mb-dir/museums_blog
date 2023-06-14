@@ -14,8 +14,8 @@
                     <label for="name" class="inline-block text-lg mb-2">
                         Nazwa użytkownika
                     </label>
-                    <input type="text" id="name" class="border border-gray-200 rounded p-2 w-full" name="name"
-                        value="{{old('name')}}" />
+                    <input required minlength="3" maxlength="50" type="text" id="name"
+                        class="border border-gray-200 rounded p-2 w-full" name="name" value="{{old('name')}}" />
                     @error('name')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -23,8 +23,8 @@
 
                 <div class="mb-6">
                     <label for="email" class="inline-block text-lg mb-2">Email</label>
-                    <input type="email" id="email" class="border border-gray-200 rounded p-2 w-full" name="email"
-                        value="{{old('email')}}" />
+                    <input required type="email" id="email" class="border border-gray-200 rounded p-2 w-full"
+                        name="email" value="{{old('email')}}" />
                     @error('email')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -34,8 +34,8 @@
                     <label for="password" class="inline-block text-lg mb-2">
                         Hasło
                     </label>
-                    <input type="password" id="password" class="border border-gray-200 rounded p-2 w-full"
-                        name="password" />
+                    <input required minlength="6" type="password" id="password"
+                        class="border border-gray-200 rounded p-2 w-full" name="password" />
                     @error('password')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -45,8 +45,8 @@
                     <label for="password2" class="inline-block text-lg mb-2">
                         Powtórz hasło
                     </label>
-                    <input type="password" id="password_confirmation" class="border border-gray-200 rounded p-2 w-full"
-                        name="password_confirmation" />
+                    <input required minlength="6" type="password" id="password_confirmation"
+                        class="border border-gray-200 rounded p-2 w-full" name="password_confirmation" />
                     @error('password_confirmation')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror

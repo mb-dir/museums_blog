@@ -12,8 +12,9 @@
                 @method("PUT")
                 <div class="mb-6">
                     <label for="title" class="inline-block text-lg mb-2">Tytuł</label>
-                    <input type="text" id="title" class="border border-gray-200 rounded p-2 w-full" name="title"
-                        placeholder="Tytuł..." value="{{$post->title}}" />
+                    <input required minlength="3" maxlength="255" type="text" id="title"
+                        class="border border-gray-200 rounded p-2 w-full" name="title" placeholder="Tytuł..."
+                        value="{{$post->title}}" />
                     @error('title')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -23,8 +24,9 @@
                     <label for="tags" class="inline-block text-lg mb-2">
                         Tagi (oddzielone przecinkiem)
                     </label>
-                    <input type="text" id="tags" class="border border-gray-200 rounded p-2 w-full" name="tags"
-                        placeholder="tag1, tag2" value="{{$post->tags}}" />
+                    <input pattern="^[a-zA-Z]+(,\s[a-zA-Z]+)*$" required type="text" id="tags"
+                        class="border border-gray-200 rounded p-2 w-full" name="tags" placeholder="tag1, tag2"
+                        value="{{$post->tags}}" />
                     @error('tags')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -34,8 +36,9 @@
                     <label for="content" class="inline-block text-lg mb-2">
                         Zawartość
                     </label>
-                    <textarea class="border border-gray-200 rounded p-2 w-full" id="content" name="content" rows="10"
-                        placeholder="Treść..." value="{{$post->content}}">{{$post->content}}</textarea>
+                    <textarea required minlength="3" maxlength="2000" class="border border-gray-200 rounded p-2 w-full"
+                        id="content" name="content" rows="10" placeholder="Treść..."
+                        value="{{$post->content}}">{{$post->content}}</textarea>
                     @error('content')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
