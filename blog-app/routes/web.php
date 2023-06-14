@@ -71,6 +71,6 @@ Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('a
 Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth');
 
 // Change user status
-Route::put('/users/status-change/{user}', [UserController::class, 'changeUserStatus'])->middleware('auth');
+Route::patch('/users/status-change/{user}', [UserController::class, 'changeUserStatus'])->middleware('auth');
 
 
