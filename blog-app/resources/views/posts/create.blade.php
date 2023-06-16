@@ -12,7 +12,7 @@
                 @csrf
                 <div class="mb-6">
                     <label for="title" class="inline-block text-lg mb-2">Tytuł</label>
-                    <input required minlength="3" maxlength="255" type="text" id="title"
+                    <input required maxlength="255" type="text" id="title"
                         class="border border-gray-200 rounded p-2 w-full" name="title" placeholder="Tytuł..."
                         value="{{old('title')}}" />
                     @error('title')
@@ -36,8 +36,8 @@
                     <label for="content" class="inline-block text-lg mb-2">
                         Zawartość
                     </label>
-                    <textarea class="border border-gray-200 rounded p-2 w-full" id="content" name="content" rows="10"
-                        placeholder="Treść..." value="{{old('content')}}"></textarea>
+                    <textarea required class="border border-gray-200 rounded p-2 w-full" id="content" name="content"
+                        rows="10" placeholder="Treść..." value="{{old('content')}}"></textarea>
                     @error('content')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror
@@ -73,10 +73,9 @@
         const photoInput = document.querySelector("#photo");
         photoInput.addEventListener("change", ()=>{
             const file = photoInput.files[0];
-            const maxSizeInBytes = 1024 * 1024 * 2; // 2MB
-            alert(1);
+            const maxSizeInBytes = 300 * 1024; // 300 kB
             if (file.size > maxSizeInBytes) {
-            alert("Wybrany obrazek jest zbyt duży. Maksymalny rozmiar to 2MB.");
+            alert("Wybrany obrazek jest zbyt duży. Maksymalny rozmiar to 300 kB.");
             photoInput.value = "";
             }
         })
