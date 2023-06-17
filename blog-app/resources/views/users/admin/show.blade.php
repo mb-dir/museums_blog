@@ -19,7 +19,7 @@
                 @endforeach
             </ul>
             <h2 class="text-2xl font-bold uppercase my-3">Posty</h2>
-            <ul class="list-disc">
+            <ul class="list">
                 @foreach($userPosts as $post)
                 <li><a class="text-blue-500" href="/posts/{{$post->id}}">{{ $post->title }}</a></li>
                 @endforeach
@@ -32,11 +32,7 @@
                 @csrf
                 @method('DELETE')
                 <button type="submit" class="text-red-500 hover:text-red-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ff0000" width="24" height="24">
-                        <path
-                            d="M21 4h-4V3c0-.6-.4-1-1-1h-6c-.6 0-1 .4-1 1v1H3c-.6 0-1 .4-1 1s.4 1 1 1h1v14c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V6h1c.6 0 1-.4 1-1s-.4-1-1-1zM8 4h8v1H8V4zm8 16H8V8h8v12z" />
-                        <path d="M9 10h2v8H9zM13 10h2v8h-2z" />
-                    </svg>
+                    <x-heroicon-o-trash class="h-6 w-6 text-red-500" />
                 </button>
             </form>
 
@@ -56,12 +52,7 @@
                 @csrf
                 @method('PATCH')
                 <button type="submit" class="">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                        <path d="M6.5 5.5l-4 4 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                        <path d="M17.5 5.5l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" />
-                    </svg>
+                    <x-heroicon-o-arrow-path class="h-6 w-6 text-blue-500" />
                 </button>
             </form>
         </div>
