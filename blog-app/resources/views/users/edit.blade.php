@@ -38,8 +38,11 @@
                     <button class="bg-purple text-white rounded py-2 px-4 hover:bg-black">
                         Zapisz
                     </button>
-
+                    @if (auth()->user()->role === 'admin')
                     <a href="/users/{{$user->id}}" class="text-black ml-4"> Powrót</a>
+                    @else
+                    <a href="/user-info/{{$user->id}}" class="text-black ml-4"> Powrót</a>
+                    @endif
                 </div>
             </form>
         </div>
