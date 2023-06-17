@@ -37,15 +37,15 @@ class PostController extends Controller {
             'title' => 'required',
             'tags' => 'required',
             'content' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png|max:300',
         ], [
             'title.required' => 'To pole jest wymagane.',
             'tags.required' => 'To pole jest wymagane.',
             'content.required' => 'To pole jest wymagane.',
             'photo.required' => 'To pole jest wymagane.',
-            'photo.image' => 'Prześlij obraz w formacie JPEG lub PNG.',
-            'photo.mimes' => 'Prześlij obraz w formacie JPEG lub PNG.',
-            'photo.max' => 'Maksymalny rozmiar obrazu to 2 MB.',
+            'photo.image' => 'Wystąpił błąd podczas przesyłania pliku(dopuszczalne formaty to JPEG i PNG, maksymalny rozmiar to 300 kB)',
+            'photo.mimes' => 'Wystąpił błąd podczas przesyłania pliku(dopuszczalne formaty to JPEG i PNG, maksymalny rozmiar to 300 kB)',
+            'photo.max' => 'Wystąpił błąd podczas przesyłania pliku(dopuszczalne formaty to JPEG i PNG, maksymalny rozmiar to 300 kB)',
         ]);
             $validData['photo']=$request->file('photo')->store('logos', 'public');
 
