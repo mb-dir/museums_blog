@@ -40,6 +40,9 @@
                 @endif
 
                 <div class="border border-gray-200 w-full mb-6"></div>
+                <div class="flex justify-center items-center">
+                    <img src="{{asset('storage/'.$post->photo)}}" alt="" class="mb-5">
+                </div>
                 <div>
                     <h3 class="text-3xl font-bold mb-4">
                         Treść
