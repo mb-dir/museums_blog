@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\CreatePostRequest;
+use App\Http\Requests\EditPostRequest;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -31,22 +34,9 @@ class PostController extends Controller {
     }
 
     // create logic
-    public function store(Request $request){
+    public function store(CreatePostRequest $request){
         if (Gate::allows('is-active')) {
-            $validData = $request->validate([
-            'title' => 'required',
-            'tags' => 'required',
-            'content' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png|max:300',
-        ], [
-            'title.required' => 'To pole jest wymagane.',
-            'tags.required' => 'To pole jest wymagane.',
-            'content.required' => 'To pole jest wymagane.',
-            'photo.required' => 'To pole jest wymagane.',
-            'photo.image' => 'Wystąpił błąd podczas przesyłania pliku(dopuszczalne formaty to JPEG i PNG, maksymalny rozmiar to 300 kB)',
-            'photo.mimes' => 'Wystąpił błąd podczas przesyłania pliku(dopuszczalne formaty to JPEG i PNG, maksymalny rozmiar to 300 kB)',
-            'photo.max' => 'Wystąpił błąd podczas przesyłania pliku(dopuszczalne formaty to JPEG i PNG, maksymalny rozmiar to 300 kB)',
-        ]);
+            $validData = $request->validated();
             $validData['photo']=$request->file('photo')->store('logos', 'public');
 
             // Create a new post instance
@@ -104,25 +94,17 @@ class PostController extends Controller {
         }
     }
 
-    public function update(Request $request, Post $post){
+    public function update(EditPostRequest $request, Post $post){
         if (Gate::allows('post-operation', $post)) {
-            $formFields = $request->validate([
-            'title'=>'required',
-            'tags'=>'required',
-            'content'=>'required',
-        ], [
-            'title.required' => 'To pole jest wymagane.',
-            'tags.required' => 'To pole jest wymagane.',
-            'content.required' => 'To pole jest wymagane.',
-        ]);
-        $post->update($formFields);
+            $formFields = $request->validated();
+            $post->update($formFields);
 
-        $message = [
-            'content' => "Post został zaaktualizowany",
-            'type' => 'success'
-        ];
+            $message = [
+                'content' => "Post został zaaktualizowany",
+                'type' => 'success'
+            ];
 
-        return redirect('/posts/'.$post->id)->with('message', $message);
+            return redirect('/posts/'.$post->id)->with('message', $message);
         } else {
             abort(403);
         }

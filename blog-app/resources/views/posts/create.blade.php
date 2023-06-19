@@ -36,8 +36,8 @@
                     <label for="content" class="inline-block text-lg mb-2">
                         Zawartość
                     </label>
-                    <textarea required class="border border-gray-200 rounded p-2 w-full" id="content" name="content"
-                        rows="10" placeholder="Treść..." value="{{old('content')}}"></textarea>
+                    <textarea required maxlength="2000" class="border border-gray-200 rounded p-2 w-full" id="content"
+                        name="content" rows="10" placeholder="Treść...">{{old('content')}}</textarea>
                     @error('content')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                     @enderror

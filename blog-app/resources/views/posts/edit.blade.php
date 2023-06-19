@@ -12,7 +12,7 @@
                 @method("PUT")
                 <div class="mb-6">
                     <label for="title" class="inline-block text-lg mb-2">Tytuł</label>
-                    <input required minlength="3" maxlength="255" type="text" id="title"
+                    <input required maxlength="255" type="text" id="title"
                         class="border border-gray-200 rounded p-2 w-full" name="title" placeholder="Tytuł..."
                         value="{{$post->title}}" />
                     @error('title')
@@ -36,8 +36,8 @@
                     <label for="content" class="inline-block text-lg mb-2">
                         Zawartość
                     </label>
-                    <textarea required minlength="3" maxlength="2000" class="border border-gray-200 rounded p-2 w-full"
-                        id="content" name="content" rows="10" placeholder="Treść..."
+                    <textarea required maxlength="2000" class="border border-gray-200 rounded p-2 w-full" id="content"
+                        name="content" rows="10" placeholder="Treść..."
                         value="{{$post->content}}">{{$post->content}}</textarea>
                     @error('content')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
