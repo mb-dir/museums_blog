@@ -15,7 +15,7 @@ class CreateCommentsTable extends Migration {
             $table->id();
             $table->text('content');
             $table->timestamp('date')->useCurrent();
-            $table->integer('score');
+            $table->integer('score')->default(2);
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
             $table->timestamps();

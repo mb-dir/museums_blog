@@ -10,8 +10,8 @@ return new class extends Migration {
      */
     public function up(): void {
         Schema::create('ranking_user', function (Blueprint $table) {
-            $table->foreignId('ranking_id')->constrained()->onDelete('cascade');;
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');;
+            $table->foreignId('ranking_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
         });
     }
 
