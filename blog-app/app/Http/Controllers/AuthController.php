@@ -11,20 +11,19 @@ use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
-
-    // Show Register/Create Form
-    public function create(){
+    public function create()
+    {
         return view('users.register');
     }
 
-    // Show Login Form
-    public function login() {
+    public function login()
+    {
         return view('users.login');
     }
 
-    // Logout User
-    public function logout(Request $request) {
-        auth()->logout();
+    public function logout(Request $request)
+    {
+        Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -37,11 +36,11 @@ class AuthController extends Controller
         return redirect('/')->with('message', $message);
     }
 
-    // Authenticate User
-    public function authenticate(AuthRequest $request) {
-        $formFields = $request->validated();
+    public function authenticate(AuthRequest $request)
+    {
+        $credentials = $request->validated();
 
-        if(Auth::attempt($formFields)) {
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
             $message = [
@@ -55,18 +54,15 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Błędne dane'])->onlyInput('email');
     }
 
-    // Create New User
-    public function store(CreateUserRequest $request) {
+    public function store(CreateUserRequest $request)
+    {
         $formFields = $request->validated();
 
-        // Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
         $formFields['register_date'] = now();
 
-        // Create User
         $user = User::create($formFields);
 
-        // Login
         Auth::login($user);
 
         $message = [
