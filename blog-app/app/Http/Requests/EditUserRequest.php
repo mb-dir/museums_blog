@@ -38,7 +38,7 @@ class EditUserRequest extends FormRequest
         return [
             'name.required' => 'To pole jest wymagane.',
             'name.min' => 'To pole musi mieć co najmniej :min znaki.',
-            'name.min' => 'To pole może mieć co najwyżej :max znaków.',
+            'name.max' => 'To pole może mieć co najwyżej :max znaków.',
             'email.required' => 'Pole e-mail jest wymagane.',
             'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
             'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
