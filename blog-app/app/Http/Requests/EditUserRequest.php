@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Requests;
-
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateUserRequest extends FormRequest
+class EditUserRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,16 +19,21 @@ class CreateUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
+        $userId = $this->route('user'); // Przyjmuję, że parametr trasy nazywa się 'user'
+
         return [
             'name' => ['required', 'min:3', 'max:50'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('users', 'email')->ignore($userId),
+            ],
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'name.required' => 'To pole jest wymagane.',
@@ -38,9 +42,6 @@ class CreateUserRequest extends FormRequest
             'email.required' => 'Pole e-mail jest wymagane.',
             'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
             'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
-            'password.required' => 'Pole hasło jest wymagane.',
-            'password.confirmed' => 'Pole potwierdzenie hasła nie zgadza się z hasłem.',
-            'password.min' => 'Pole hasło musi mieć co najmniej :min znaków.',
         ];
     }
 }

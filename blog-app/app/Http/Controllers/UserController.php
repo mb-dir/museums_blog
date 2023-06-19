@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -54,17 +55,9 @@ class UserController extends Controller {
     }
 
     // Update user logic
-    public function update(Request $request, User $user){
+    public function update(EditUserRequest $request, User $user){
         if (auth()->user()->id === $user->id || auth()->user()->role === 'admin') {
-            $formFields = $request->validate([
-                'name'=>'required',
-                'email'=>['required', 'email', Rule::unique('users', 'email')->ignore($user->id)],
-            ], [
-                'name.required' => 'To pole jest wymagane.',
-                'email.required' => 'Pole e-mail jest wymagane.',
-                'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
-                'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
-            ]);
+            $formFields = $request->validated();
             $user->update($formFields);
 
             $message = [
