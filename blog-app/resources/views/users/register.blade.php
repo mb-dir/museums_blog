@@ -14,7 +14,7 @@
                     <label for="name" class="inline-block text-lg mb-2">
                         Nazwa użytkownika
                     </label>
-                    <input required maxlength="50" type="text" id="name"
+                    <input required maxlength="50" minlength="3" type="text" id="name"
                         class="border border-gray-200 rounded p-2 w-full" name="name" value="{{old('name')}}" />
                     @error('name')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>

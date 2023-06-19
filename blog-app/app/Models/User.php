@@ -20,7 +20,6 @@ class User extends Authenticatable {
         'email',
         'password',
         'register_date',
-        'score'
     ];
 
     /**

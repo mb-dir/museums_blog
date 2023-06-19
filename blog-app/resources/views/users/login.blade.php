@@ -21,10 +21,10 @@
                 </div>
 
                 <div class="mb-6">
-                    <label @required(true) for="password" class="inline-block text-lg mb-2">
+                    <label for="password" class="inline-block text-lg mb-2">
                         Hasło
                     </label>
-                    <input type="password" id="password" class="border border-gray-200 rounded p-2 w-full"
+                    <input required type="password" id="password" class="border border-gray-200 rounded p-2 w-full"
                         name="password" value="{{old('password')}}" />
                     @error('password')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>

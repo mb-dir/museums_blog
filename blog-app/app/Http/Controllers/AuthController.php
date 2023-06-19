@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Http\Requests\AuthRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserRequest;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -36,17 +38,10 @@ class AuthController extends Controller
     }
 
     // Authenticate User
-    public function authenticate(Request $request) {
-        $formFields = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => 'required'
-        ], [
-            'email.required' => 'Pole e-mail jest wymagane.',
-            'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
-            'password.required' => 'Pole hasło jest wymagane.',
-        ]);
+    public function authenticate(AuthRequest $request) {
+        $formFields = $request->validated();
 
-        if(auth()->attempt($formFields)) {
+        if(Auth::attempt($formFields)) {
             $request->session()->regenerate();
 
             $message = [
@@ -61,32 +56,18 @@ class AuthController extends Controller
     }
 
     // Create New User
-    public function store(Request $request) {
-        $formFields = $request->validate([
-            'name' => ['required', 'min:3'],
-            'email' => ['required', 'email', Rule::unique('users', 'email')],
-            'password' => 'required|confirmed|min:6'
-        ], [
-            'name.required' => 'To pole jest wymagane.',
-            'name.min' => 'To pole musi mieć co najmniej :min znaki.',
-            'email.required' => 'Pole e-mail jest wymagane.',
-            'email.email' => 'Pole e-mail musi być poprawnym adresem e-mail.',
-            'email.unique' => 'Podany adres e-mail już istnieje w bazie danych.',
-            'password.required' => 'Pole hasło jest wymagane.',
-            'password.confirmed' => 'Pole potwierdzenie hasła nie zgadza się z hasłem.',
-            'password.min' => 'Pole hasło musi mieć co najmniej :min znaków.',
-        ]);
+    public function store(CreateUserRequest $request) {
+        $formFields = $request->validated();
 
         // Hash Password
         $formFields['password'] = bcrypt($formFields['password']);
         $formFields['register_date'] = now();
-        $formFields['score'] = 0;
 
         // Create User
         $user = User::create($formFields);
 
         // Login
-        auth()->login($user);
+        Auth::login($user);
 
         $message = [
             'content' => "Twoje konto zostało utworzone, zostałeś automatycznie zalogowany",
