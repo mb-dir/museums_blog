@@ -18,28 +18,29 @@ use App\Http\Controllers\CommentController;
 */
 
 // PostController
-Route::get('/', [PostController::class, 'index']); // Wyświetl wszystkie posty (strona główna)
-Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth'); // Wyświetl widok tworzenia postu
-Route::post('/posts', [PostController::class, 'store'])->middleware('auth'); // Zapisz nowy post
-Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->middleware('auth'); // Wyświetl widok edycji postu
-Route::put('/posts/{post}', [PostController::class, 'update'])->middleware('auth'); // Aktualizuj post
-Route::get('/posts/{post}', [PostController::class, 'show']); // Wyświetl pojedynczy post
-Route::delete('/posts/{post}', [PostController::class, 'delete'])->middleware('auth'); // Usuń post
+Route::get('/', [PostController::class, 'index']); // Show all posts (homepage)
+Route::get('/posts/create', [PostController::class, 'create'])->middleware('auth'); // Show create post view
+Route::post('/posts', [PostController::class, 'store'])->middleware('auth'); // Save new post
+Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->middleware('auth'); // Show edit post view
+Route::put('/posts/{post}', [PostController::class, 'update'])->middleware('auth'); // Update post
+Route::get('/posts/{post}', [PostController::class, 'show']); // Show single post
+Route::delete('/posts/{post}', [PostController::class, 'delete'])->middleware('auth'); // Delete post
 
 // CommentController
-Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->middleware('auth'); // Dodaj nowy komentarz
+Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->middleware('auth'); // Add new comment
 
 // AuthController
-Route::get('/register', [AuthController::class, 'create'])->middleware('guest'); // Wyświetl formularz rejestracji dla niezalogowanego użytkownika
-Route::post('/users', [AuthController::class, 'store']); // Stwórz nowego użytkownika
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth'); // Wyloguj użytkownika
-Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest'); // Wyświetl formularz logowania
-Route::post('/users/authenticate', [AuthController::class, 'authenticate']); // Zaloguj użytkownika
+Route::get('/register', [AuthController::class, 'create'])->middleware('guest'); // Show registration form for non-authenticated user
+Route::post('/users', [AuthController::class, 'store']); // Create new user
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth'); // Log out user
+Route::get('/login', [AuthController::class, 'login'])->name('login')->middleware('guest'); // Show login form
+Route::post('/users/authenticate', [AuthController::class, 'authenticate']); // Authenticate user
 
 // UserController
-Route::get('/user-info/{user}', [UserController::class, 'show'])->middleware('auth'); // Wyświetl informacje o użytkowniku
-Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware("auth"); // Usuń użytkownika
-Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('auth'); // Wyświetl widok edycji użytkownika
-Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth'); // Aktualizuj użytkownika
-Route::patch('/users/status-change/{user}', [UserController::class, 'changeUserStatus'])->middleware('auth'); // Zmień status użytkownika
-Route::get('/users/{user}', [UserController::class, 'showUser'])->middleware("auth"); // Wyświetl użytkownika (dla administratora)
+Route::get('/user-info/{user}', [UserController::class, 'show'])->middleware('auth'); // Show user information
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware("auth"); // Delete user
+Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('auth'); // Show user edit view
+Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth'); // Update user
+Route::patch('/users/status-change/{user}', [UserController::class, 'changeUserStatus'])->middleware('auth'); // Change user status
+Route::get('/users/{user}', [UserController::class, 'showUser'])->middleware("auth"); // Show user (for admin)
+
