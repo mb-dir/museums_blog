@@ -11,16 +11,10 @@ class UserController extends Controller
     public function show(User $user)
     {
         if (auth()->user()->id === $user->id) {
-            $users = null;
             $userPosts = $user->posts;
-
-            if ($user->role === 'admin') {
-                $users = User::where('role', 'user')->get();
-            }
-
             $rankings = $user->rankings;
 
-            return view('users.show', compact('users', 'rankings', 'userPosts'));
+            return view('users.show', compact('rankings', 'userPosts'));
         } else {
             abort(403);
         }
@@ -38,7 +32,7 @@ class UserController extends Controller
             'content' => "Użytkownik został usunięty",
             'type' => 'success'
         ];
-        return redirect('/user-info/'.auth()->user()->id)->with('message', $message);
+        return redirect('/admin-panel')->with('message', $message);
     }
 
     public function edit(User $user)
@@ -62,7 +56,7 @@ class UserController extends Controller
             ];
 
             $isAdmin = auth()->user()->role === "admin";
-            $redirectUrl = $isAdmin ? '/user-info/'.auth()->user()->id : '/user-info/'.$user->id;
+            $redirectUrl = $isAdmin ? '/admin-panel' : '/user-info/'.$user->id;
 
             return redirect($redirectUrl)->with('message', $message);
         } else {
@@ -94,5 +88,14 @@ class UserController extends Controller
             'type' => 'success'
         ];
         return back()->with('message', $message);
+    }
+
+    public function getAdminPanel()
+    {
+        if (!Gate::allows('is-admin')) {
+            abort(403);
+        }
+        $users = User::where('role', 'user')->get();
+        return view('users.admin.panel', compact('users'));
     }
 }

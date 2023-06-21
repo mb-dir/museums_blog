@@ -42,5 +42,6 @@ Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware("
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('auth'); // Show user edit view
 Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth'); // Update user
 Route::patch('/users/status-change/{user}', [UserController::class, 'changeUserStatus'])->middleware('auth'); // Change user status
+Route::get('/admin-panel', [UserController::class, 'getAdminPanel'])->middleware('auth');
 Route::get('/users/{user}', [UserController::class, 'showUser'])->middleware("auth"); // Show user (for admin)
 

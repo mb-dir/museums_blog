@@ -36,6 +36,13 @@
                     Witaj {{auth()->user()->name}}
                 </a>
             </li>
+            @if (auth()->user()->role === 'admin')
+            <li>
+                <a href="/admin-panel">
+                    Admin panel
+                </a>
+            </li>
+            @endif
             <li>
                 <form class="inline" method="POST" action="/logout">
                     @csrf

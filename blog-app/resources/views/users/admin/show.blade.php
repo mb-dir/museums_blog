@@ -73,7 +73,7 @@
                 </div>
             </div>
         </div>
-        <a href="/user-info/{{auth()->user()->id}}" class="text-black ml-4">
+        <a href="/admin-panel" class="text-black ml-4">
             <- Powrót </a>
     </div>
 </x-layout>
