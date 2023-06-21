@@ -24,7 +24,7 @@ class CreatePostRequest extends FormRequest
     {
         return [
             'title' => 'required|max:255',
-            'tags' => 'required|regex:/^[a-zA-Z]+(,\s[a-zA-Z]+)*$/',
+            'tags' => 'required|regex:/^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(,\s[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$/',
             'content' => 'required|max:2000',
             'photo' => 'required|image|mimes:jpeg,png|max:300',
         ];

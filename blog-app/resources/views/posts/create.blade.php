@@ -24,8 +24,8 @@
                     <label for="tags" class="inline-block text-lg mb-2">
                         Tagi (oddzielone przecinkiem)
                     </label>
-                    <input pattern="^[a-zA-Z]+(,\s[a-zA-Z]+)*$" required type="text" id="tags"
-                        class="border border-gray-200 rounded p-2 w-full" name="tags" placeholder="tag1, tag2"
+                    <input pattern="^[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+(,\s[a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]+)*$" required type="text"
+                        id="tags" class="border border-gray-200 rounded p-2 w-full" name="tags" placeholder="tag1, tag2"
                         value="{{old('tags')}}" />
                     @error('tags')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
