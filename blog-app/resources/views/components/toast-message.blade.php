@@ -39,7 +39,7 @@ break;
 }
 @endphp
 <div
-    class="card-animate fixed top-0 left-1/2 transform -translate-x-1/2 {{ $bgClass }} text-white z-50 px-20 py-5 rounded">
+    class="card-animate fixed top-0 left-1/2 transform -translate-x-1/2 {{ $bgClass }} text-white z-50 px-10 py-5 rounded text-center">
     <p>{{ $message['content'] }}</p>
 </div>
 @endif
