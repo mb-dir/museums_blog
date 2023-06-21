@@ -14,6 +14,7 @@ class Post extends Model {
         'tags',
         'date',
         "photo",
+        "score",
         'user_id',
     ];
 
