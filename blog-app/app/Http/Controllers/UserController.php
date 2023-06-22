@@ -32,7 +32,7 @@ class UserController extends Controller
             'content' => "Użytkownik został usunięty",
             'type' => 'success'
         ];
-        return redirect('/admin-panel')->with('message', $message);
+        return redirect()->route('adminPanel')->with('message', $message);
     }
 
     public function edit(User $user)
@@ -45,24 +45,25 @@ class UserController extends Controller
     }
 
     public function update(EditUserRequest $request, User $user)
-    {
-        if (auth()->user()->id === $user->id || auth()->user()->role === 'admin') {
-            $formFields = $request->validated();
-            $user->update($formFields);
+{
+    if (auth()->user()->id === $user->id || auth()->user()->role === 'admin') {
+        $formFields = $request->validated();
+        $user->update($formFields);
 
-            $message = [
-                'content' => "Profil został zaaktualizowany",
-                'type' => 'success'
-            ];
+        $message = [
+            'content' => "Profil został zaaktualizowany",
+            'type' => 'success'
+        ];
 
-            $isAdmin = auth()->user()->role === "admin";
-            $redirectUrl = $isAdmin ? '/admin-panel' : '/users/'.$user->id;
+        $isAdmin = auth()->user()->role === "admin";
+        $redirectRoute = $isAdmin ? 'adminPanel' : 'users.show';
 
-            return redirect($redirectUrl)->with('message', $message);
-        } else {
-            abort(403);
-        }
+        return redirect()->route($redirectRoute, compact('user'))->with('message', $message);
+    } else {
+        abort(403);
     }
+}
+
     public function changeStatus(User $user)
     {
         if (!Gate::allows('is-admin')) {

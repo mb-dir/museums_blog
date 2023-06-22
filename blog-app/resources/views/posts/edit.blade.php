@@ -7,7 +7,7 @@
                 </h2>
             </header>
 
-            <form method="POST" action="/posts/{{$post->id}}">
+            <form method="POST" action="{{ route('posts.update', compact('post')) }}">
                 @csrf
                 @method("PUT")
                 <div class="mb-6">
@@ -48,8 +48,7 @@
                     <button class="bg-purple text-white rounded py-2 px-4 hover:bg-black">
                         Zapisz
                     </button>
-
-                    <a href="/posts/{{$post->id}}" class="text-black ml-4"> Powrót</a>
+                    <a href={{route('posts.show', compact('post'))}} class="text-black ml-4"> Powrót</a>
                 </div>
             </form>
         </div>

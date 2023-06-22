@@ -32,19 +32,19 @@
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
             <li>
-                <a href="/users/{{auth()->user()->id}}" class="font-bold uppercase">
+                <a href={{ route('users.show', ['user'=>auth()->user()->id]) }} class="font-bold uppercase">
                     Witaj {{auth()->user()->name}}
                 </a>
             </li>
             @if (auth()->user()->role === 'admin')
             <li>
-                <a href="/admin-panel">
+                <a href={{route('adminPanel')}}>
                     Admin panel
                 </a>
             </li>
             @endif
             <li>
-                <form class="inline" method="POST" action="/logout">
+                <form class="inline" method="POST" action=" {{ route('logout') }}">
                     @csrf
                     <button type="submit">
                         Wyloguj się
@@ -53,10 +53,10 @@
             </li>
             @else
             <li>
-                <a href="/register" class="hover:text-purple">Rejestracja</a>
+                <a href={{route("register")}} class="hover:text-purple">Rejestracja</a>
             </li>
             <li>
-                <a href="/login" class="hover:text-purple">
+                <a href={{route("login")}} class="hover:text-purple">
                     Logowanie</a>
             </li>
             @endauth

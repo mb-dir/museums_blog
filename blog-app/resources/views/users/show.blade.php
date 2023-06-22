@@ -33,7 +33,8 @@
                 @else
                 <ul class="list">
                     @foreach($userPosts as $post)
-                    <li><a class="text-blue-500" href="/posts/{{$post->id}}">{{ $post->title }}</a></li>
+                    <li><a class="text-blue-500" href={{route('posts.show', compact('post'))}}>{{ $post->title }}</a>
+                    </li>
                     @endforeach
                 </ul>
                 @endif
@@ -43,7 +44,7 @@
                     Dostępne akcje
                 </h2>
                 <p>Edytuj swoje dane</p>
-                <a href="/users/{{auth()->user()->id}}/edit" class="flex justify-center">
+                <a href={{route('users.update', ['user'=>auth()->user()->id])}} class="flex justify-center">
                     <x-heroicon-o-pencil class="h-6 w-6 text-blue-500" />
                 </a>
             </div>

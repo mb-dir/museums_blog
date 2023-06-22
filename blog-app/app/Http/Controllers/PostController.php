@@ -107,7 +107,7 @@ class PostController extends Controller
                 'type' => 'success',
             ];
 
-            return redirect('/posts/'.$post->id)->with('message', $message);
+            return redirect()->route('posts.show', compact('post'))->with('message', $message);
         } else {
             abort(403);
         }

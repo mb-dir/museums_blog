@@ -8,7 +8,7 @@
                 <p class="mb-4">Stwórz konto</p>
             </header>
 
-            <form method="POST" action="/users">
+            <form method="POST" action="{{ route('users.store') }}">
                 @csrf
                 <div class="mb-6">
                     <label for="name" class="inline-block text-lg mb-2">
@@ -61,7 +61,7 @@
                 <div class="mt-8">
                     <p>
                         Masz już konto? Nie czekaj
-                        <a href="login" class="bg-purple p-2 text-gray-100 rounded">zaloguj
+                        <a href={{route('login')}} class="bg-purple p-2 text-gray-100 rounded">zaloguj
                             się</a>
                     </p>
                 </div>

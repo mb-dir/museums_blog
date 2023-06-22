@@ -10,10 +10,10 @@
                 @if (Auth::check() && $post->user_id == Auth::user()->id || (Auth::check() && Auth::user()->role ===
                 'admin'))
                 <p>Możesz edytować post</p>
-                <a href="/posts/{{$post->id}}/edit">
+                <a href={{route('posts.update', compact('post'))}}>
                     <x-heroicon-o-pencil class="h-6 w-6 text-blue-500" />
                 </a>
-                <form action="/posts/{{$post->id}}" method="POST">
+                <form action="{{ route('posts.destroy', compact('post')) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <p>Możesz usunąć post</p>
@@ -56,7 +56,7 @@
     </div>
     <div class="flex mx-auto items-center justify-center mt-10 mx-8 mb-4 max-w-lg">
         @if (Auth::check() && auth()->user()->status === 'active')
-        <form action="/posts/{{$post->id}}/comments" method="POST"
+        <form action="{{ route('comments.store', compact('post')) }}" method="POST"
             class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
             @csrf
             <div class="flex flex-wrap -mx-3 mb-6">

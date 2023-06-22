@@ -11,7 +11,7 @@
                 </h2>
             </header>
 
-            <form method="POST" action="/users/{{$user->id}}">
+            <form method="POST" action="{{ route('users.update', compact('user')) }}">
                 @csrf
                 @method("PUT")
                 <div class="mb-6">
@@ -39,9 +39,9 @@
                         Zapisz
                     </button>
                     @if (auth()->user()->role === 'admin')
-                    <a href="/users/{{$user->id}}" class="text-black ml-4"> Powrót</a>
+                    <a href={{route('adminPanel.users.show', compact('user'))}} class="text-black ml-4"> Powrót</a>
                     @else
-                    <a href="/users/{{$user->id}}" class="text-black ml-4"> Powrót</a>
+                    <a href={{route('users.show', compact('user'))}} class="text-black ml-4"> Powrót</a>
                     @endif
                 </div>
             </form>

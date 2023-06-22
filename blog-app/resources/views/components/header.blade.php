@@ -18,7 +18,7 @@
             pozwól nam zainspirować Twoją pasję!
         </p>
         <p class="text-2xl">
-            Nie czekaj, <a class="text-purple font-bold" href="/posts/create">podziel się</a> swoimi
+            Nie czekaj, <a class="text-purple font-bold" href={{route('posts.create')}}>podziel się</a> swoimi
             przemyśleniami!
         </p>
     </div>

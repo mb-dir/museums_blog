@@ -43,7 +43,7 @@
                 <div>
                     <h2 class="text-2xl font-bold uppercase my-3">Dostępne akcje</h2>
                     <p>Usuń użytkownika</p>
-                    <form action="/users/{{$user->id}}" method="POST" class="inline">
+                    <form action="{{ route('users.destroy', compact('user')) }}" method="POST" class="inline">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="text-red-500 hover:text-red-700">
@@ -63,7 +63,7 @@
                         Odblokuj użytkownika
                         @endif
                     </p>
-                    <form action="/users/{{$user->id}}" method="POST" class="inline">
+                    <form action="{{ route('users.changeStatus', compact('user')) }}" method="POST" class="inline">
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="">

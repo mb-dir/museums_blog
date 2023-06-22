@@ -8,7 +8,7 @@
                 <p class="mb-4">Podaj swoje dane</p>
             </header>
 
-            <form method="POST" action="/users/authenticate">
+            <form method="POST" action="{{ route('users.authenticate') }}">
                 @csrf
                 <div class="mb-6">
                     <label for="email" class="inline-block text-lg mb-2">Email</label>
@@ -40,7 +40,7 @@
                 <div class="mt-8">
                     <p>
                         Nie masz konta?
-                        <a href="/register" class="text-purple">Zarajestruj
+                        <a href={{route('register')}} class="text-purple">Zarajestruj
                             się</a> już teraz!
                     </p>
                 </div>

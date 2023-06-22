@@ -8,7 +8,7 @@
                 </h2>
             </header>
 
-            <form method="POST" action="/posts" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-6">
                     <label for="title" class="inline-block text-lg mb-2">Tytuł</label>
