@@ -56,25 +56,14 @@ class UserController extends Controller
             ];
 
             $isAdmin = auth()->user()->role === "admin";
-            $redirectUrl = $isAdmin ? '/admin-panel' : '/user-info/'.$user->id;
+            $redirectUrl = $isAdmin ? '/admin-panel' : '/users/'.$user->id;
 
             return redirect($redirectUrl)->with('message', $message);
         } else {
             abort(403);
         }
     }
-
-    public function showUser(User $user)
-    {
-        if (!Gate::allows('is-admin')) {
-            abort(403);
-        }
-        $rankings = $user->rankings;
-        $userPosts = $user->posts;
-        return view('users.admin.show', compact('user', 'rankings', 'userPosts'));
-    }
-
-    public function changeUserStatus(User $user)
+    public function changeStatus(User $user)
     {
         if (!Gate::allows('is-admin')) {
             abort(403);
@@ -88,14 +77,5 @@ class UserController extends Controller
             'type' => 'success'
         ];
         return back()->with('message', $message);
-    }
-
-    public function getAdminPanel()
-    {
-        if (!Gate::allows('is-admin')) {
-            abort(403);
-        }
-        $users = User::where('role', 'user')->get();
-        return view('users.admin.panel', compact('users'));
     }
 }

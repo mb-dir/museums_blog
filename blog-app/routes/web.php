@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CommentController;
 
 /*
@@ -37,11 +38,13 @@ Route::get('/login', [AuthController::class, 'login'])->name('login')->middlewar
 Route::post('/users/authenticate', [AuthController::class, 'authenticate']); // Authenticate user
 
 // UserController
-Route::get('/user-info/{user}', [UserController::class, 'show'])->middleware('auth'); // Show user information
+Route::get('/users/{user}', [UserController::class, 'show'])->middleware('auth'); // Show user information
 Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware("auth"); // Delete user
 Route::get('/users/{user}/edit', [UserController::class, 'edit'])->middleware('auth'); // Show user edit view
 Route::put('/users/{user}', [UserController::class, 'update'])->middleware('auth'); // Update user
-Route::patch('/users/status-change/{user}', [UserController::class, 'changeUserStatus'])->middleware('auth'); // Change user status
-Route::get('/admin-panel', [UserController::class, 'getAdminPanel'])->middleware('auth');
-Route::get('/users/{user}', [UserController::class, 'showUser'])->middleware("auth"); // Show user (for admin)
+Route::patch('/users/{user}', [UserController::class, 'changeStatus'])->middleware('auth'); // Change user status
+
+// AdminController
+Route::get('/admin-panel', [AdminController::class, 'index'])->middleware('auth'); // Show admin panel
+Route::get('/admin-panel/users/{user}', [AdminController::class, 'show'])->middleware("auth"); // Show user (for admin)
 

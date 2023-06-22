@@ -7,7 +7,7 @@
                 <ul class="w-full">
                     @foreach($users as $user)
                     <li class="border-b-2 w-full">
-                        <a href={{"/users/".$user->id}}>{{ $user->name }}</a>
+                        <a href={{"/admin-panel/users/".$user->id}}>{{ $user->name }}</a>
                     </li>
                     @endforeach
                 </ul>

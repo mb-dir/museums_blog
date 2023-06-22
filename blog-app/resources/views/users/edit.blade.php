@@ -41,7 +41,7 @@
                     @if (auth()->user()->role === 'admin')
                     <a href="/users/{{$user->id}}" class="text-black ml-4"> Powrót</a>
                     @else
-                    <a href="/user-info/{{$user->id}}" class="text-black ml-4"> Powrót</a>
+                    <a href="/users/{{$user->id}}" class="text-black ml-4"> Powrót</a>
                     @endif
                 </div>
             </form>

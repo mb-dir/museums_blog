@@ -63,7 +63,7 @@
                         Odblokuj użytkownika
                         @endif
                     </p>
-                    <form action="/users/status-change/{{$user->id}}" method="POST" class="inline">
+                    <form action="/users/{{$user->id}}" method="POST" class="inline">
                         @csrf
                         @method('PATCH')
                         <button type="submit" class="">
