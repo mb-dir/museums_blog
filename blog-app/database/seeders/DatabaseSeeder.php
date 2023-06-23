@@ -78,7 +78,7 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('admin'),
             'register_date' => now(),
             'score' => 0,
-            'role' => 'admin',
+            'role' => 'admin123',
         ]);
     }
 }

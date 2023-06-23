@@ -17,9 +17,9 @@ class PostFactory extends Factory {
                 'Artefakt', 'Ekspozycja', 'Antyk', 'Archeologia', 'Dziedzictwo',
                 'Archiwum', 'Kultura', 'Cywilizacja', 'Relikwia', 'Historyk',
                 'Galeria', 'Konserwacja', 'Odkrycie', 'Archeolog', 'Restauracja',
-                'Starożytny', 'Oś czasu', 'Dokument', 'Artefakty', 'Historiografia',
+                'Starożytny', 'Mitologia', 'Dokument', 'Artefakty', 'Historiografia',
                 'Ruiny', 'Archeologiczny', 'Kustosz', 'Archiwa', 'Zabytki',
-                'Manuskrypt', 'Dzieło sztuki', 'Paleontologia', 'Antropologia', 'Konserwacja'
+                'Manuskrypt', 'Dzieła', 'Paleontologia', 'Antropologia', 'Konserwacja'
             ], 3)),
             'score' => 8,
             "photo" => "example.png",
