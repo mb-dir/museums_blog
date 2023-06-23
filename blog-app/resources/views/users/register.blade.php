@@ -61,7 +61,7 @@
                 <div class="mt-8">
                     <p>
                         Masz już konto? Nie czekaj
-                        <a href={{route('login')}} class="bg-purple p-2 text-gray-100 rounded">zaloguj
+                        <a href={{route('login')}} class="bg-purple p-2 text-gray-100 rounded">Zaloguj
                             się</a>
                     </p>
                 </div>
