@@ -55,7 +55,7 @@
         </div>
     </div>
     <div class="flex mx-auto items-center justify-center mt-10 mx-8 mb-4 max-w-lg">
-        @if (Auth::check() && auth()->user()->status === 'active')
+        @if (Auth::check() && Auth::user()->status === 'active')
         <form action="{{ route('comments.store', compact('post')) }}" method="POST"
             class="w-full max-w-xl bg-white rounded-lg px-4 pt-2">
             @csrf
@@ -74,7 +74,7 @@
                 </div>
             </div>
         </form>
-        @elseif (Auth::check() && auth()->user()->status === 'blocked')
+        @elseif (Auth::check() && Auth::user()->status === 'blocked')
         <p class="text-center py-32">Wygląda na to, że zostałeś zablokowany i nie możesz dodawać
             komentarzy. Skontaktuj
             się z

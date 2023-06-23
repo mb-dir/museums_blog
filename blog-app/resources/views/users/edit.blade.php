@@ -3,7 +3,7 @@
         <div class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">
             <header class="text-center">
                 <h2 class="text-2xl font-bold uppercase mb-1">
-                    @if (auth()->user()->role === 'admin')
+                    @if (Auth::user()->role === 'admin')
                     Edytuj profil użytkownika {{$user->name}}
                     @else
                     Edytuj swoje dane
@@ -38,7 +38,8 @@
                     <button class="bg-purple text-white rounded py-2 px-4 hover:bg-black">
                         Zapisz
                     </button>
-                    @if (auth()->user()->role === 'admin')
+                    {{-- if user is admin and doesn't edit his profie --}}
+                    @if (Auth::user()->role === 'admin' && Auth::id() !== $user->id)
                     <a href={{route('adminPanel.users.show', compact('user'))}} class="text-black ml-4"> Powrót</a>
                     @else
                     <a href={{route('users.show', compact('user'))}} class="text-black ml-4"> Powrót</a>

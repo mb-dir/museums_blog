@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\EditUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\EditUserRequest;
 
 class UserController extends Controller
 {
@@ -55,7 +56,8 @@ class UserController extends Controller
             'type' => 'success'
         ];
 
-        $isAdmin = auth()->user()->role === "admin";
+        // if user is admin and doesn't edit his profie
+        $isAdmin = Auth::user()->role === "admin" && Auth::id() !== $user->id;
         $redirectRoute = $isAdmin ? 'adminPanel.users.show' : 'users.show';
 
         return redirect()->route($redirectRoute, compact('user'))->with('message', $message);

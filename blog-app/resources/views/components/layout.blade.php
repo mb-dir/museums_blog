@@ -32,11 +32,11 @@
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
             <li>
-                <a href={{ route('users.show', ['user'=>auth()->user()->id]) }} class="font-bold uppercase">
-                    Witaj {{auth()->user()->name}}
+                <a href={{ route('users.show', ['user'=>Auth::id()]) }} class="font-bold uppercase">
+                    Witaj {{Auth::user()->name}}
                 </a>
             </li>
-            @if (auth()->user()->role === 'admin')
+            @if (Auth::user()->role === 'admin')
             <li>
                 <a href={{route('adminPanel')}}>
                     Admin panel

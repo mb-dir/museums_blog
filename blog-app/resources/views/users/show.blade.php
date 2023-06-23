@@ -6,14 +6,14 @@
                     Twoje dane
                 </h2>
                 <ul>
-                    <li><span class="font-bold">Nazwa</span>: {{ auth()->user()->name }}</li>
-                    <li><span class="font-bold">Email</span>: {{ auth()->user()->email }}</li>
-                    <li><span class="font-bold">Data rejestracji</span>: {{ auth()->user()->register_date }}</li>
-                    <li><span class="font-bold">Twój score</span>: {{ auth()->user()->score }}</li>
-                    <li><span class="font-bold">Rola</span>: {{ auth()->user()->role }}</li>
-                    <li><span class="font-bold">Status</span>: {{ auth()->user()->status }}</li>
+                    <li><span class="font-bold">Nazwa</span>: {{ Auth::user()->name }}</li>
+                    <li><span class="font-bold">Email</span>: {{ Auth::user()->email }}</li>
+                    <li><span class="font-bold">Data rejestracji</span>: {{ Auth::user()->register_date }}</li>
+                    <li><span class="font-bold">Twój score</span>: {{ Auth::user()->score }}</li>
+                    <li><span class="font-bold">Rola</span>: {{ Auth::user()->role }}</li>
+                    <li><span class="font-bold">Status</span>: {{ Auth::user()->status }}</li>
                 </ul>
-                @if (auth()->user()->role === 'user')
+                @if (Auth::user()->role === 'user')
                 <h2 class="text-2xl font-bold uppercase my-3">Twoje rangi</h2>
                 @if ($rankings->isEmpty())
                 <p>Brak rang</p>
@@ -44,7 +44,7 @@
                     Dostępne akcje
                 </h2>
                 <p>Edytuj swoje dane</p>
-                <a href={{route('users.edit', ['user'=>auth()->user()->id])}} class="flex justify-center">
+                <a href={{route('users.edit', ['user'=>Auth::id()])}} class="flex justify-center">
                     <x-heroicon-o-pencil class="h-6 w-6 text-blue-500" />
                 </a>
             </div>

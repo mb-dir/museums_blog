@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreatePostRequest;
-use App\Http\Requests\EditPostRequest;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use App\Http\Requests\EditPostRequest;
+use App\Http\Requests\CreatePostRequest;
 
 class PostController extends Controller
 {
@@ -49,11 +50,11 @@ class PostController extends Controller
             'content' => $validatedData['content'],
             'photo' => $photoPath,
             'date' => now(),
-            'user_id' => auth()->id(),
+            'user_id' => Auth::id(),
             'score' => 8,
         ]);
 
-        $user = User::find(auth()->id());
+        $user = User::find(Auth::id());
         $user->score += $post->score;
         $user->save();
 

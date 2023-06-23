@@ -1,7 +1,7 @@
 <x-layout>
     <div class="mx-4">
         <div class="bg-gray-50 border border-gray-200 p-10 rounded max-w-lg mx-auto mt-24">
-            @if (Auth::check() && auth()->user()->status === 'active')
+            @if (Auth::check() && Auth::user()->status === 'active')
             <header class="text-center">
                 <h2 class="text-2xl font-bold uppercase mb-1">
                     Utwórz post
