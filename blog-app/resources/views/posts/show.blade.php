@@ -10,7 +10,7 @@
                 @if (Auth::check() && $post->user_id == Auth::user()->id || (Auth::check() && Auth::user()->role ===
                 'admin'))
                 <p>Możesz edytować post</p>
-                <a href={{route('posts.update', compact('post'))}}>
+                <a href={{route('posts.edit', compact('post'))}}>
                     <x-heroicon-o-pencil class="h-6 w-6 text-blue-500" />
                 </a>
                 <form action="{{ route('posts.destroy', compact('post')) }}" method="POST">

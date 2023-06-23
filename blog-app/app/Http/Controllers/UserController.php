@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
-        if (!Gate::allows('allow-show-user')) {
+        if (!Gate::allows('allow-show-user', $user)) {
             abort(403);
         }
         $userPosts = $user->posts;
@@ -56,7 +56,7 @@ class UserController extends Controller
         ];
 
         $isAdmin = auth()->user()->role === "admin";
-        $redirectRoute = $isAdmin ? 'adminPanel' : 'users.show';
+        $redirectRoute = $isAdmin ? 'adminPanel.users.show' : 'users.show';
 
         return redirect()->route($redirectRoute, compact('user'))->with('message', $message);
     }

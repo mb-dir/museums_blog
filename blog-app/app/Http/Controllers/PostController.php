@@ -72,7 +72,7 @@ class PostController extends Controller
         return redirect('/')->with('message', $message);
     }
 
-    public function delete(Post $post)
+    public function destroy(Post $post)
     {
         if (!Gate::allows('allow-post-operations', $post)) {
             abort(403);

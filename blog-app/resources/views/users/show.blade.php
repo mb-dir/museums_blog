@@ -44,7 +44,7 @@
                     Dostępne akcje
                 </h2>
                 <p>Edytuj swoje dane</p>
-                <a href={{route('users.update', ['user'=>auth()->user()->id])}} class="flex justify-center">
+                <a href={{route('users.edit', ['user'=>auth()->user()->id])}} class="flex justify-center">
                     <x-heroicon-o-pencil class="h-6 w-6 text-blue-500" />
                 </a>
             </div>
