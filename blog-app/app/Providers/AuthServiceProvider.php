@@ -26,7 +26,7 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('post-operation', function (User $user, Post $post) {
+        Gate::define('allow-post-operations', function (User $user, Post $post) {
             return $user->role === "admin" || ($user->id === $post->user_id && $user->status === "active");
         });
 
@@ -36,6 +36,12 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('is-active', function (User $user) {
             return $user->status === "active";
+        });
+        Gate::define('allow-update-user', function ($loggedInUser, User $targetUser) {
+            return $loggedInUser->id === $targetUser->id || $loggedInUser->role === 'admin';
+        });
+        Gate::define('allow-show-user', function ($loggedInUser, User $targetUser) {
+            return $loggedInUser->id === $targetUser->id;
         });
     }
 }

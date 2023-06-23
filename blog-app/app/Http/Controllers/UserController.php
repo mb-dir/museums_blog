@@ -10,14 +10,13 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
-        if (auth()->user()->id === $user->id) {
-            $userPosts = $user->posts;
-            $rankings = $user->rankings;
-
-            return view('users.show', compact('rankings', 'userPosts'));
-        } else {
+        if (!Gate::allows('allow-show-user')) {
             abort(403);
         }
+        $userPosts = $user->posts;
+        $rankings = $user->rankings;
+
+        return view('users.show', compact('rankings', 'userPosts'));
     }
 
     public function destroy(User $user)
@@ -37,16 +36,17 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        if (auth()->user()->id === $user->id || auth()->user()->role === 'admin') {
-            return view('users.edit', compact('user'));
-        } else {
+        if (!Gate::allows('allow-update-user', $user)) {
             abort(403);
         }
+        return view('users.edit', compact('user'));
     }
 
     public function update(EditUserRequest $request, User $user)
-{
-    if (auth()->user()->id === $user->id || auth()->user()->role === 'admin') {
+    {
+        if (!Gate::allows('allow-update-user', $user)) {
+            abort(403);
+        }
         $formFields = $request->validated();
         $user->update($formFields);
 
@@ -59,10 +59,7 @@ class UserController extends Controller
         $redirectRoute = $isAdmin ? 'adminPanel' : 'users.show';
 
         return redirect()->route($redirectRoute, compact('user'))->with('message', $message);
-    } else {
-        abort(403);
     }
-}
 
     public function changeStatus(User $user)
     {

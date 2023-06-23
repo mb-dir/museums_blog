@@ -37,79 +37,75 @@ class PostController extends Controller
 
     public function store(CreatePostRequest $request)
     {
-        if (Gate::allows('is-active')) {
-            $validatedData = $request->validated();
-            $photoPath = $request->file('photo')->store('logos', 'public');
-
-            $post = Post::create([
-                'title' => $validatedData['title'],
-                'tags' => $validatedData['tags'],
-                'content' => $validatedData['content'],
-                'photo' => $photoPath,
-                'date' => now(),
-                'user_id' => auth()->id(),
-                'score' => 8,
-            ]);
-
-            $user = User::find(auth()->id());
-            $user->score += $post->score;
-            $user->save();
-
-            $rankings = [1, 2, 3, 4, 5];
-            foreach ($rankings as $rank) {
-                if ($user->score >= $rank * 20) {
-                    $user->rankings()->syncWithoutDetaching([$rank]);
-                }
-            }
-
-            $message = [
-                'content' => "Post został utworzony",
-                'type' => 'success',
-            ];
-
-            return redirect('/')->with('message', $message);
-        } else {
+        if (!Gate::allows('is-active')) {
             abort(403);
         }
+        $validatedData = $request->validated();
+        $photoPath = $request->file('photo')->store('logos', 'public');
+
+        $post = Post::create([
+            'title' => $validatedData['title'],
+            'tags' => $validatedData['tags'],
+            'content' => $validatedData['content'],
+            'photo' => $photoPath,
+            'date' => now(),
+            'user_id' => auth()->id(),
+            'score' => 8,
+        ]);
+
+        $user = User::find(auth()->id());
+        $user->score += $post->score;
+        $user->save();
+
+        $rankings = [1, 2, 3, 4, 5];
+        foreach ($rankings as $rank) {
+            if ($user->score >= $rank * 20) {
+                $user->rankings()->syncWithoutDetaching([$rank]);
+            }
+        }
+
+        $message = [
+           'content' => "Post został utworzony",
+            'type' => 'success',
+        ];
+
+        return redirect('/')->with('message', $message);
     }
 
     public function delete(Post $post)
     {
-        if (Gate::allows('post-operation', $post)) {
-            $post->delete();
-            $message = [
-                'content' => "Post został usunięty",
-                'type' => 'delete',
-            ];
-            return redirect('/')->with('message', $message);
-        } else {
+        if (!Gate::allows('allow-post-operations', $post)) {
             abort(403);
         }
+        $post->delete();
+        $message = [
+            'content' => "Post został usunięty",
+            'type' => 'delete',
+        ];
+        return redirect('/')->with('message', $message);
     }
 
     public function edit(Post $post)
     {
-        if (Gate::allows('post-operation', $post)) {
-            return view('posts.edit', compact('post'));
-        } else {
+        if (!Gate::allows('allow-post-operations', $post)) {
             abort(403);
         }
+        return view('posts.edit', compact('post'));
     }
 
     public function update(EditPostRequest $request, Post $post)
     {
-        if (Gate::allows('post-operation', $post)) {
-            $formFields = $request->validated();
-            $post->update($formFields);
-
-            $message = [
-                'content' => "Post został zaaktualizowany",
-                'type' => 'success',
-            ];
-
-            return redirect()->route('posts.show', compact('post'))->with('message', $message);
-        } else {
+        if (!Gate::allows('allow-post-operations', $post)) {
             abort(403);
         }
+        $formFields = $request->validated();
+        $post->update($formFields);
+
+        $message = [
+            'content' => "Post został zaaktualizowany",
+            'type' => 'success',
+        ];
+
+        return redirect()->route('posts.show', compact('post'))->with('message', $message);
     }
 }
