@@ -75,10 +75,10 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('admin123'),
             'register_date' => now(),
             'score' => 0,
-            'role' => 'admin123',
+            'role' => 'admin',
         ]);
     }
 }
