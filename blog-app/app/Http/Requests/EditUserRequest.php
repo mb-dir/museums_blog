@@ -21,7 +21,7 @@ class EditUserRequest extends FormRequest
      */
     public function rules(): array
     {
-        $userId = $this->route('user'); // Przyjmuję, że parametr trasy nazywa się 'user'
+        $userId = $this->route('user');
 
         return [
             'name' => 'required|min:3|max:50',
