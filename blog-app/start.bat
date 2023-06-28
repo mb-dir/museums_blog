@@ -1,8 +1,6 @@
-%systemDrive%\xampp\mysql\bin\mysql -uroot -e "CREATE DATABASE IF NOT EXISTS laravel_muzealne_spojrzenia;"
+%systemDrive%\xampp\mysql\bin\mysql -uroot -e "CREATE DATABASE IF NOT EXISTS blog_app;"
 
 if %errorlevel% neq 0 msg %username% "Nie udalo sie utworzyc bazy danych." && exit /b %errorlevel%
-
-php -r "copy('.env.example', '.env');"
 
 call composer install
 
