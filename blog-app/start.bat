@@ -8,6 +8,10 @@ call php artisan migrate:fresh --seed
 
 call php artisan key:generate
 
+xcopy "%~dp0temp_photos" "%~dp0\storage\app\public" /E /I /Q /Y
+
+rmdir "%~dp0temp_photos" /S /Q
+
 call php artisan storage:link
 
 call php artisan serve
